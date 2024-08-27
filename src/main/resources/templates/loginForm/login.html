@@ -6,12 +6,21 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <style>
+            body {
+                background-image: url('/images/background.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vh;
+            }
+        </style>
         <title>Login - MonkeyFlip</title>
     </head>
     <body>
     <form id="userForm" action="/logar" method="post">
-        <section class="vh-100" style="background-color: #7b7b80;">
-
+        <section class="vh-100">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -50,6 +59,7 @@
             </div>
         </section>
     </form>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     </body>
 </th:html>

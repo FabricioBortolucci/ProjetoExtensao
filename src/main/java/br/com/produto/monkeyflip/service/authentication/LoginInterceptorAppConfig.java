@@ -14,6 +14,8 @@ public class LoginInterceptorAppConfig implements WebMvcConfigurer {
                         "/login",
                         "/css/**",
                         "/js/**",
-                        "/error");
+                        "/error",
+                        "/favicon.ico",
+                        "/images/**");
     }
 }
