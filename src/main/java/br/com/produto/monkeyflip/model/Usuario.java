@@ -1,68 +1,62 @@
 package br.com.produto.monkeyflip.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity(name = "usuario")
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String nome;
-    private String endereco;
-    private String telefone;
-    private String cpf;
-    private Integer idade;
 
+    @Column(name = "usu_nome")
+    private String usuNome;
 
-    public String getNome() {
-        return nome;
-    }
+    @Column(name = "usu_senha")
+    private String usuSenha;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
+    public String getUsuNome() {
+        return usuNome;
+    }
+
+    public void setUsuNome(String usuNome) {
+        this.usuNome = usuNome;
+    }
+
+    public String getUsuSenha() {
+        return usuSenha;
+    }
+
+    public void setUsuSenha(String usuSenha) {
+        this.usuSenha = usuSenha;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) && Objects.equals(usuNome, usuario.usuNome) && Objects.equals(usuSenha, usuario.usuSenha);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, usuNome, usuSenha);
+    }
+
+    @Override
+    public String toString() {
+        return id.toString();
     }
 }
 
