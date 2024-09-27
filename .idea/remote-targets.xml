@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="app" type="docker-compose" uuid="c1d451fb-2ae5-43ae-9fc5-66861da9dbcb">
+        <config>
+          <option name="targetPlatform">
+            <TargetPlatform />
+          </option>
+          <option name="configurationFiles">
+            <list>
+              <option value="C:\Users\fabri\OneDrive\Documents\MonkeyFlip\ProjetoExtensao\docker-compose.yml" />
+            </list>
+          </option>
+          <option name="serviceName" value="app" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="homePath" value="/usr/local/openjdk-22" />
+            <option name="javaVersionString" value="22" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

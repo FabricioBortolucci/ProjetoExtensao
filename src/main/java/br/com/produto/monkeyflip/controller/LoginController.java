@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @CrossOrigin("*")
@@ -20,7 +21,10 @@ public class LoginController {
     private UsuarioService usuarioService;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@RequestParam(required = false) String erro, Model model) {
+        if (erro != null) {
+            model.addAttribute("erro", erro);
+        }
         return "loginForm/login";
     }
 
@@ -28,19 +32,19 @@ public class LoginController {
     public String logar(Model model, Usuario usuarioParam, HttpServletResponse response, HttpServletRequest request) {
         Usuario usu = this.usuarioService.findByUsu(usuarioParam);
         if (usu != null) {
-            int maxAge = (60*60); // 1 hora de cookie
+            int maxAge = (60 * 60); // 1 hora de cookie
             CookieService.setCookie(response, "usuarioId", usu.getId().toString(), maxAge);
             request.getSession().setAttribute("user", usu);
             return "redirect:/home";
         }
-        model.addAttribute("erro", "Usuário ou Senha inválidos");
-        return "loginForm/login";
+        model.addAttribute("erro", "");
+        return "redirect:/login?erro=Usuario ou Senha invalidos";
     }
 
     @GetMapping("/sair")
     public String sair(HttpServletResponse response) {
-            CookieService.setCookie(response, "usuarioId", "", 0);
-            return "redirect:/home";
+        CookieService.setCookie(response, "usuarioId", "", 0);
+        return "redirect:/home";
 
     }
 
