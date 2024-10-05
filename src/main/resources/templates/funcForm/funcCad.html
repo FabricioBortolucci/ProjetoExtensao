@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebars.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js"
+            integrity="sha512-F5Ul1uuyFlGnIT1dk2c4kB4DBdi5wnBJjVhL7gQlGh46Xn0VhvD8kgxLtjdZ5YN83gybk/aASUAlpdoWUjRR3g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+
+    <title th:text="${isEdit} ? 'Alterar' : 'Cadastrar'"></title>
+</head>
+<body>
+<div class="d-flex">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0">
+    </div>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+        <div class="container">
+
+            <h2 class="mt-5 mb-4">Formulário para cadastro de funcionário</h2>
+
+            <form action="#" th:action="@{/funcionarios/salvar}" method="post" th:object="${funcionario}"
+                  class="form-control pt-2  w-75">
+                <div class="form-group">
+                    <input type="hidden" th:field="*{id}"/>
+
+                    <label class="form-label" for="funcNome">Nome</label>
+                    <input type="text" class="form-control w-50" id="funcNome" th:field="*{nome}"/>
+                    <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
+
+                    <label class="form-label mt-3" for="funcCpf">Cpf</label>
+                    <input type="text" class="form-control w-50" id="funcCpf" th:field="*{cpf}"/>
+                    <div th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="text-danger"></div>
+
+                    <label class="form-label mt-3" for="funcTele">Telefone</label>
+                    <input type="text" class="form-control w-25" id="funcTele" th:field="*{telefone}">
+                    <div th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></div>
+
+                    <button class="btn btn-success mt-3" type="submit"
+                            th:text="${isEdit} ? 'Atualizar' : 'Salvar'"></button>
+                    <a th:href="@{/funcionarios}" class="btn btn-danger mt-3">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Aplica a máscara ao campo de CPF (formato: 000.000.000-00)
+    Inputmask({
+        mask: "999.999.999-99",
+        placeholder: "___ . ___ . ___ - __",
+        clearIncomplete: true
+    }).mask("#funcCpf");
+
+    // Aplica a máscara ao campo de Telefone (formato: (00) 00000-0000)
+    Inputmask({
+        mask: "(99) 99999-9999",
+        placeholder: "(__) _____-____",
+        clearIncomplete: true
+    }).mask("#funcTele");
+</script>
+
+
+</body>
+</html>

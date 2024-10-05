@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -34,10 +35,21 @@ public class Macaco implements Serializable {
     @Min(value = 0)
     private Integer idade;
 
+    @Column(name = "monk_quantidade")
+    @NotNull(message = "A quantidade não pode ser nula ou menor que 1.")
+    @Min(value = 1)
+    private Integer quantidade;
+
     @Column(name = "monk_peso")
     @NotNull(message = "O peso não pode ser nulo e deve ser maior que zero.")
     @DecimalMin(value = "0.0", inclusive = false)
     private Double peso;
+
+    @Column(name = "monk_preco_unitario")
+    @NotNull(message = "O preço não pode ser nulo e deve ser maior que zero.")
+    @DecimalMin(value = "0.0", inclusive = false)
+    private BigDecimal precoUnitario;
+
 
 
     public Long getId() {
@@ -72,6 +84,14 @@ public class Macaco implements Serializable {
         this.idade = idade;
     }
 
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
     public Double getPeso() {
         return peso;
     }
@@ -80,17 +100,25 @@ public class Macaco implements Serializable {
         this.peso = peso;
     }
 
+    public BigDecimal getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public void setPrecoUnitario(BigDecimal precoUnitario) {
+        this.precoUnitario = precoUnitario;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Macaco macaco = (Macaco) o;
-        return Objects.equals(id, macaco.id) && Objects.equals(nome, macaco.nome) && Objects.equals(especie, macaco.especie) && Objects.equals(idade, macaco.idade) && Objects.equals(peso, macaco.peso);
+        return Objects.equals(id, macaco.id) && Objects.equals(nome, macaco.nome) && Objects.equals(especie, macaco.especie) && Objects.equals(idade, macaco.idade) && Objects.equals(quantidade, macaco.quantidade) && Objects.equals(peso, macaco.peso) && Objects.equals(precoUnitario, macaco.precoUnitario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, especie, idade, peso);
+        return Objects.hash(id, nome, especie, idade, quantidade, peso, precoUnitario);
     }
 
     @Override

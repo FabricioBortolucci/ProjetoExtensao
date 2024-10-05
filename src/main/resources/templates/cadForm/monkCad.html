@@ -8,7 +8,25 @@
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/sidebars.js"></script>
 
-    <title>Cadastro</title>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js"
+            integrity="sha512-F5Ul1uuyFlGnIT1dk2c4kB4DBdi5wnBJjVhL7gQlGh46Xn0VhvD8kgxLtjdZ5YN83gybk/aASUAlpdoWUjRR3g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+
+    <title th:text="${isEdit} ? 'Alterar' : 'Cadastrar'"></title>
 </head>
 <body>
 <div class="d-flex">
@@ -43,6 +61,16 @@
                     <input type="text" class="form-control w-25" id="monkPeso" th:field="*{peso}"/>
                     <div th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}" class="text-danger"></div>
 
+                    <label class="form-label mt-3" for="monkQuant">Quantidade</label>
+                    <input type="number" class="form-control w-25" id="monkQuant" th:field="*{quantidade}">
+                    <div th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}" class="text-danger"></div>
+
+                    <label class="form-label mt-3" for="monkPreco">Preço Unitario</label>
+                    <input type="number"
+                           class="form-control w-25" id="monkPreco" th:field="*{precoUnitario}"/>
+                    <div th:if="${#fields.hasErrors('precoUnitario')}" th:errors="*{precoUnitario}"
+                         class="text-danger"></div>
+
                     <button class="btn btn-success mt-3" type="submit"
                             th:text="${isEdit} ? 'Atualizar' : 'Salvar'"></button>
                     <a th:href="@{/macacos}" class="btn btn-danger mt-3">Cancelar</a>
@@ -51,5 +79,24 @@
         </div>
     </div>
 </div>
+
+<!--<script>
+    $(document).ready(function () {
+        $('#monkPreco').inputmask({
+            alias: 'numeric',
+            groupSeparator: '.',
+            radixPoint: ',',
+            digits: 2,
+            autoGroup: true,
+            prefix: 'R$ ',
+            rightAlign: false,
+            digitsOptional: false,  // Obriga o uso de 2 casas decimais
+            placeholder: '0',       // Preenche automaticamente com zeros após a vírgula
+            removeMaskOnSubmit: true
+        });
+    });
+</script>-->
+
+
 </body>
 </html>

@@ -3,9 +3,17 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>800</IntrospectionStateNumber>
+      <Grants>1||-9223372036854775808|c|G
+1||10|c|G
+1||10|C|G
+1||10|T|G
+4||-9223372036854775808|c|G
+4||10|c|G
+4||10|C|G
+4||10|T|G</Grants>
+      <IntrospectionStateNumber>875</IntrospectionStateNumber>
       <ServerVersion>16.4</ServerVersion>
-      <StartupTime>1728044305</StartupTime>
+      <StartupTime>1728145540</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -258,7 +266,7 @@ true America/Yellowknife
 false Antarctica/Casey
 false Antarctica/Davis
 false Antarctica/DumontDUrville
-false Antarctica/Macquarie
+true Antarctica/Macquarie
 false Antarctica/Mawson
 true Antarctica/McMurdo
 false Antarctica/Palmer
@@ -379,29 +387,29 @@ false Atlantic/Reykjavik
 false Atlantic/South_Georgia
 false Atlantic/St_Helena
 false Atlantic/Stanley
-false Australia/ACT
-false Australia/Adelaide
+true Australia/ACT
+true Australia/Adelaide
 false Australia/Brisbane
-false Australia/Broken_Hill
-false Australia/Canberra
-false Australia/Currie
+true Australia/Broken_Hill
+true Australia/Canberra
+true Australia/Currie
 false Australia/Darwin
 false Australia/Eucla
-false Australia/Hobart
-false Australia/LHI
+true Australia/Hobart
+true Australia/LHI
 false Australia/Lindeman
-false Australia/Lord_Howe
-false Australia/Melbourne
-false Australia/NSW
+true Australia/Lord_Howe
+true Australia/Melbourne
+true Australia/NSW
 false Australia/North
 false Australia/Perth
 false Australia/Queensland
-false Australia/South
-false Australia/Sydney
-false Australia/Tasmania
-false Australia/Victoria
+true Australia/South
+true Australia/Sydney
+true Australia/Tasmania
+true Australia/Victoria
 false Australia/West
-false Australia/Yancowinna
+true Australia/Yancowinna
 true BDST
 false BDT
 false BNT
@@ -616,7 +624,7 @@ false KRAST
 false KRAT
 false KST
 false Kwajalein
-false LHDT
+true LHDT
 false LHST
 false LIGT
 false LINT
@@ -704,7 +712,7 @@ false Pacific/Marquesas
 false Pacific/Midway
 false Pacific/Nauru
 false Pacific/Niue
-false Pacific/Norfolk
+true Pacific/Norfolk
 false Pacific/Noumea
 false Pacific/Pago_Pago
 false Pacific/Palau
@@ -800,7 +808,7 @@ false Zulu
 14643||10|C|G
 14643||-9223372036854775808|U|G
 14643||10|U|G</Grants>
-      <IntrospectionStateNumber>800</IntrospectionStateNumber>
+      <IntrospectionStateNumber>875</IntrospectionStateNumber>
       <ObjectId>16398</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4224,13 +4232,21 @@ false Zulu
     <schema id="264" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>800</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-10-04.21:12:42</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>875</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-10-05.17:46:06</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <sequence id="265" parent="264" name="macaco_monk_id_seq">
+    <sequence id="265" parent="264" name="funcionario_id_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>16437</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>871</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="266" parent="264" name="macaco_monk_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>16425</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
@@ -4238,7 +4254,7 @@ false Zulu
       <StateNumber>798</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="266" parent="264" name="macaco_seq">
+    <sequence id="267" parent="264" name="macaco_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>16424</ObjectId>
       <SequenceIdentity>1+50</SequenceIdentity>
@@ -4246,7 +4262,7 @@ false Zulu
       <StateNumber>782</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="267" parent="264" name="usuario_seq">
+    <sequence id="268" parent="264" name="usuario_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>16416</ObjectId>
       <SequenceIdentity>1+50</SequenceIdentity>
@@ -4254,19 +4270,99 @@ false Zulu
       <StateNumber>755</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="268" parent="264" name="macaco">
+    <table id="269" parent="264" name="funcionario">
+      <ObjectId>16438</ObjectId>
+      <StateNumber>874</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="270" parent="264" name="macaco">
       <ObjectId>16426</ObjectId>
-      <StateNumber>798</StateNumber>
+      <StateNumber>852</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="269" parent="264" name="usuario">
+    <table id="271" parent="264" name="usuario">
       <ObjectId>16409</ObjectId>
-      <StateNumber>767</StateNumber>
+      <StateNumber>874</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="270" parent="268" name="monk_id">
+    <column id="272" parent="269" name="id">
+      <DasType>bigint|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>871</StateNumber>
+      <SequenceId>16437</SequenceId>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="273" parent="269" name="func_cpf">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>871</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="274" parent="269" name="func_nome">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>871</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="275" parent="269" name="func_tel">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>871</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="276" parent="269" name="usuario_id">
+      <DasType>bigint|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>871</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="277" parent="269" name="fkwnmqfjh318guaklwmtu9nnma">
+      <ColNames>usuario_id</ColNames>
+      <ObjectId>16447</ObjectId>
+      <StateNumber>874</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16409</RefTableId>
+    </foreign-key>
+    <index id="278" parent="269" name="funcionario_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16443</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>871</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="279" parent="269" name="ukp0htu9jav6vq5l5dliq4muqg7">
+      <ColNames>usuario_id</ColNames>
+      <ObjectId>16445</ObjectId>
+      <StateNumber>873</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="280" parent="269" name="funcionario_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16444</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>871</StateNumber>
+      <UnderlyingIndexId>16443</UnderlyingIndexId>
+    </key>
+    <key id="281" parent="269" name="ukp0htu9jav6vq5l5dliq4muqg7">
+      <ObjectId>16446</ObjectId>
+      <StateNumber>873</StateNumber>
+      <UnderlyingIndexId>16445</UnderlyingIndexId>
+    </key>
+    <check id="282" parent="270" name="macaco_monk_quantidade_check">
+      <ColNames>monk_quantidade</ColNames>
+      <ObjectId>16436</ObjectId>
+      <Predicate>monk_quantidade &gt;= 1</Predicate>
+      <StateNumber>852</StateNumber>
+    </check>
+    <column id="283" parent="270" name="monk_id">
       <DasType>bigint|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -4275,31 +4371,43 @@ false Zulu
       <SequenceId>16425</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="271" parent="268" name="monk_especie">
+    <column id="284" parent="270" name="monk_especie">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
       <StateNumber>798</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="272" parent="268" name="monk_idade">
+    <column id="285" parent="270" name="monk_idade">
       <DasType>integer|0s</DasType>
       <Position>3</Position>
       <StateNumber>798</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="273" parent="268" name="monk_nome">
+    <column id="286" parent="270" name="monk_nome">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
       <StateNumber>798</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="274" parent="268" name="monk_peso">
+    <column id="287" parent="270" name="monk_peso">
       <DasType>double precision|0s</DasType>
       <Position>5</Position>
       <StateNumber>798</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <index id="275" parent="268" name="macaco_pkey">
+    <column id="288" parent="270" name="monk_preco_unitario">
+      <DasType>numeric(38,2 digit)|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>851</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="289" parent="270" name="monk_quantidade">
+      <DasType>integer|0s</DasType>
+      <Position>7</Position>
+      <StateNumber>852</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="290" parent="270" name="macaco_pkey">
       <ColNames>monk_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16431</ObjectId>
@@ -4308,33 +4416,33 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="276" parent="268" name="macaco_pkey">
+    <key id="291" parent="270" name="macaco_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16432</ObjectId>
       <Primary>1</Primary>
       <StateNumber>798</StateNumber>
       <UnderlyingIndexId>16431</UnderlyingIndexId>
     </key>
-    <column id="277" parent="269" name="id">
+    <column id="292" parent="271" name="id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>754</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="278" parent="269" name="usu_nome">
+    <column id="293" parent="271" name="usu_nome">
       <DasType>varchar(255)|0s</DasType>
       <Position>7</Position>
       <StateNumber>766</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="279" parent="269" name="usu_senha">
+    <column id="294" parent="271" name="usu_senha">
       <DasType>varchar(255)|0s</DasType>
       <Position>8</Position>
       <StateNumber>767</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="280" parent="269" name="usuario_pkey">
+    <index id="295" parent="271" name="usuario_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16414</ObjectId>
@@ -4343,7 +4451,7 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="281" parent="269" name="usuario_pkey">
+    <key id="296" parent="271" name="usuario_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16415</ObjectId>
       <Primary>1</Primary>

@@ -43,9 +43,8 @@ public class MacacoController {
                                BindingResult result,
                                Model model) {
         if (result.hasErrors()) {
-            // Retornar o mesmo formulário se houver erros
             model.addAttribute("macaco", macaco);
-            return "cadForm/monkCad"; // Nome da view do formulário
+            return "cadForm/monkCad";
         }
 
         macacoService.salvar(macaco);
@@ -61,6 +60,7 @@ public class MacacoController {
 
     @GetMapping("/macacos/editar/{id}")
     public String editarMacaco(@PathVariable Long id, Model model) {
+        model.addAttribute("isEdit", true);
         model.addAttribute("macaco", macacoService.buscarPorId(id));
         return "cadForm/monkCad";
     }
