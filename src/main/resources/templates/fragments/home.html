@@ -1,49 +1,51 @@
 <!doctype html>
-<th:html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-        <meta name="generator" content="Hugo 0.84.0">
-        <title>Monkey · Flip</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Monkey · Flip</title>
 
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
 
 
-        <!-- Bootstrap core CSS -->
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-        <style>
-            html, body {
-                height: 100%;
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+
+        .bg-dark {
+            height: 100vh; /* 100% da altura da viewport */
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
             }
-
-            .bg-dark {
-                height: 100vh; /* 100% da altura da viewport */
-            }
-
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                user-select: none;
-            }
-
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                    font-size: 3.5rem;
-                }
-            }
-        </style>
+        }
+    </style>
 
 
-        <!-- Custom styles for this template -->
-        <link href="/css/sidebars.css" rel="stylesheet">
-    </head>
-    <body>
+    <!-- Custom styles for this template -->
+    <link href="/css/sidebars.css" rel="stylesheet">
+</head>
+<body>
 
+<th:block th:fragment="left-menu">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="bootstrap" viewBox="0 0 118 94">
             <title>Bootstrap</title>
@@ -109,10 +111,10 @@
         </symbol>
     </svg>
 
-    <main>
-
+    <main style="border-bottom-right-radius: 1rem !important;
+            border-top-right-radius: 1rem !important;">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"/>
                 </svg>
@@ -142,15 +144,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a class="nav-link text-white carregar-pagina" href="/macacos">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#grid"/>
                         </svg>
-                        Produtos
+                        Macacos
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a class="nav-link text-white carregar-pagina" href="">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#people-circle"/>
                         </svg>
@@ -165,23 +167,23 @@
                     <svg class="bi me-2" width="32" height="32">
                         <use xlink:href="#people-circle"/>
                     </svg>
-                    <strong th:text="${user.usuNome}"></strong>
+                    <!--                    <strong th:text="${user.usuNome}"></strong>-->
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                     <li>
                         <form th:action="@{/sair}" method="get">
-                            <button  type="submit" class="dropdown-item">Sair</button>
+                            <button type="submit" class="dropdown-item">Sair</button>
                         </form>
                     </li>
                 </ul>
             </div>
         </div>
 
-
     </main>
+</th:block>
+<script src="/js/bootstrap.bundle.min.js"></script>
 
-    <script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/sidebars.js"></script>
 
-    <script src="/js/sidebars.js"></script>
-    </body>
-</th:html>
+</body>
+</html>

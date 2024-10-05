@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebars.js"></script>
+    <style>
+
+        /* table.transparent-table {
+             background-color: transparent !important; !* Torna o fundo da tabela transparente *!
+             border: none !important; !* Remove bordas, se necessário *!
+         }
+
+         table.transparent-table th,
+         table.transparent-table td {
+             background-color: transparent !important; !* Torna o fundo das células transparente *!
+         }*/
+
+
+    </style>
+    <title>Listagem</title>
+</head>
+<body>
+<div class="d-flex">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0"></div>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+        <div class="container-fluid mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <caption><strong>Lista de Macacos</strong></caption>
+
+                    <table class="table table-striped table-bordeless table-hover w-85">
+                        <thead class="table-light sticky-top table-dark" style="top: 0;">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Espécie</th>
+                            <th>Idade</th>
+                            <th>Peso</th>
+                            <th>Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="monk : ${macacoList}">
+                            <td th:text="${monk.id}"></td>
+                            <td th:text="${monk.nome}"></td>
+                            <td th:text="${monk.especie}"></td>
+                            <td th:text="${monk.idade}"></td>
+                            <td th:text="${#numbers.formatDecimal(monk.peso, 1,'POINT', 2, 'COMMA')} + ' kg'"></td>
+                            <td>
+                                <a th:href="@{/macacos/editar/{id}(id=${monk.id})}" class="btn btn-outline-primary">Editar</a>
+                                <a th:href="@{/macacos/excluir/{id}(id=${monk.id})}" class="btn btn-danger">Excluir</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="me-3">
+                            <a th:href="@{/macacos/novo}" class="btn btn-primary">Cadastrar</a>
+                        </div>
+
+                        <div class="mx-auto">
+                            <nav>
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{/macacos(page=${currentPage - 1}, size=${size})}">Anterior</a>
+                                    </li>
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                                        th:classappend="${i == currentPage} ? 'active'">
+                                        <a class="page-link" th:href="@{/macacos(page=${i}, size=${size})}"
+                                           th:text="${i + 1}"></a>
+                                    </li>
+                                    <li class="page-item"
+                                        th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{/macacos(page=${currentPage + 1}, size=${size})}">Próximo</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

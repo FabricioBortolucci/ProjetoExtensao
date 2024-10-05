@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebars.js"></script>
+
+    <title>Cadastro</title>
+</head>
+<body>
+<div class="d-flex">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0">
+    </div>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+        <div class="container">
+
+            <h2 class="mt-5 mb-4">Formulário para cadastro de macaco</h2>
+
+            <form action="#" th:action="@{/macacos/salvar}" method="post" th:object="${macaco}"
+                  class="form-control pt-2  w-75">
+                <div class="form-group">
+                    <input type="hidden" th:field="*{id}"/>
+
+                    <label class="form-label" for="monkNome">Nome</label>
+                    <input type="text" class="form-control w-50" id="monkNome"
+                           placeholder="Ex. Babuino" th:field="*{nome}"/>
+                    <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger">nome errado</div>
+
+                    <label class="form-label mt-3" for="monkSpecie">Espécie</label>
+                    <input type="text" class="form-control w-50" id="monkSpecie"
+                           placeholder="Ex. Cebíneos" th:field="*{especie}"/>
+                    <div th:if="${#fields.hasErrors('especie')}" th:errors="*{especie}" class="text-danger"></div>
+
+                    <label class="form-label mt-3" for="monkIdade">Idade</label>
+                    <input type="number" class="form-control w-25" id="monkIdade" th:field="*{idade}">
+                    <div th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}" class="text-danger"></div>
+
+                    <label class="form-label mt-3" for="monkPeso">Peso em kg</label>
+                    <input type="text" class="form-control w-25" id="monkPeso" th:field="*{peso}"/>
+                    <div th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}" class="text-danger"></div>
+
+                    <button class="btn btn-success mt-3" type="submit"
+                            th:text="${isEdit} ? 'Atualizar' : 'Salvar'"></button>
+                    <a th:href="@{/macacos}" class="btn btn-danger mt-3">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

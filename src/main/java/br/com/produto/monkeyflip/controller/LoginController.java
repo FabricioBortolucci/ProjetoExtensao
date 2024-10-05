@@ -35,7 +35,7 @@ public class LoginController {
             int maxAge = (60 * 60); // 1 hora de cookie
             CookieService.setCookie(response, "usuarioId", usu.getId().toString(), maxAge);
             request.getSession().setAttribute("user", usu);
-            return "redirect:/home";
+            return "redirect:home";
         }
         model.addAttribute("erro", "");
         return "redirect:/login?erro=Usuario ou Senha invalidos";
@@ -44,7 +44,7 @@ public class LoginController {
     @GetMapping("/sair")
     public String sair(HttpServletResponse response) {
         CookieService.setCookie(response, "usuarioId", "", 0);
-        return "redirect:/home";
+        return "redirect:/login";
 
     }
 
