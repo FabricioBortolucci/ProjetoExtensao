@@ -1,4 +1,4 @@
-Projeto de extensão (mini TCC) feito em:
+Projeto de extensão (mini TCC 3° ano) feito em:
 Java;
 Spring;
 Thymeleaf;
