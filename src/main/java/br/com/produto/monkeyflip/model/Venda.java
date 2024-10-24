@@ -6,6 +6,7 @@ import br.com.produto.monkeyflip.model.enums.TipoPagamento;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -18,8 +19,7 @@ public class Venda {
     private Long id;
 
     @Column(name = "data_venda")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date data = new Date();
+    private LocalDate data;
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
     private List<ItensVenda> itensVenda;
@@ -60,11 +60,11 @@ public class Venda {
         this.id = id;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
