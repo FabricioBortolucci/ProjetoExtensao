@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class MacacoController {
 
+    private final MacacoService macacoService;
+
     @Autowired
-    private MacacoService macacoService;
+    public MacacoController(MacacoService macacoService) {
+        this.macacoService = macacoService;
+    }
 
     @GetMapping("/macacos")
     public String listFormMacaco(HttpServletRequest request, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {

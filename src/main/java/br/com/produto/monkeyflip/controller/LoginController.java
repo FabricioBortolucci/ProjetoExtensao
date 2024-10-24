@@ -8,20 +8,22 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin("*")
 public class LoginController {
 
+    private final UsuarioService usuarioService;
+
     @Autowired
-    private UsuarioService usuarioService;
+    public LoginController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String erro, Model model) {
+        model.addAttribute("loginUser", new Usuario());
         if (erro != null) {
             model.addAttribute("erro", erro);
         }
@@ -29,12 +31,14 @@ public class LoginController {
     }
 
     @PostMapping("/logar")
-    public String logar(Model model, Usuario usuarioParam, HttpServletResponse response, HttpServletRequest request) {
+    public String logar(@ModelAttribute("loginUser") Usuario usuarioParam, Model model,  HttpServletResponse response, HttpServletRequest request) {
+        if (usuarioParam == null || usuarioParam.getUsuNome() == null) {
+            return "redirect:/login?erro=Preencha os campos corretamente";
+        }
         Usuario usu = this.usuarioService.findByUsu(usuarioParam);
         if (usu != null) {
             int maxAge = (60 * 60); // 1 hora de cookie
             CookieService.setCookie(response, "usuarioId", usu.getId().toString(), maxAge);
-            request.getSession().setAttribute("user", usu);
             return "redirect:home";
         }
         model.addAttribute("erro", "");

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebars.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js"
+            integrity="sha512-F5Ul1uuyFlGnIT1dk2c4kB4DBdi5wnBJjVhL7gQlGh46Xn0VhvD8kgxLtjdZ5YN83gybk/aASUAlpdoWUjRR3g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#funcionario-search").autocomplete({
+                source: "buscarFunc",
+                minLength: 3,
+                select: function (event, ui) {
+                    this.value = ui.item.label;
+                    $("#func_id").val(ui.item.value);
+                    return false;
+                }
+            })
+        })
+
+        function clearHiddenField() {
+            var searchField = document.getElementById('funcionario-search');
+            var hiddenField = document.getElementById('func_id');
+
+            // Limpa o campo oculto se o campo de texto estiver vazio
+            if (searchField.value.trim() === '') {
+                hiddenField.value = '';
+            }
+        }
+
+    </script>
+
+    <title th:text="${isEdit} ? 'Alterar' : 'Cadastrar'"></title>
+</head>
+<body>
+<div class="d-flex">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0">
+    </div>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+        <div class="container">
+
+            <h2 class="mt-5 mb-4">Formulário para cadastro de usuário</h2>
+
+            <form action="#" th:action="@{/usuarios/salvar}" method="post" th:object="${newUser}"
+                  class="form-control pt-2  w-75">
+                <div class="form-group">
+                    <input type="hidden" th:field="*{id}"/>
+
+                    <label class="form-label" for="usuNome">Nome</label>
+                    <input type="text" class="form-control w-50" id="usuNome" th:field="*{usuNome}"/>
+                    <div th:if="${#fields.hasErrors('usuNome')}" th:errors="*{usuNome}" class="text-danger"></div>
+
+                    <label class="form-label mt-3" for="usuSenha">Senha</label>
+                    <input type="password" class="form-control w-50" id="usuSenha" th:field="*{usuSenha}"/>
+                    <div th:if="${#fields.hasErrors('usuSenha')}" th:errors="*{usuSenha}" class="text-danger"></div>
+
+                    <label class="form-label mt-3" for="funcionario-search">Funcionário</label>
+                    <input type="text" class="form-control w-50" id="funcionario-search" name="funcName"
+                           th:value="${isEdit != null ? newUser.funcionario.nome : null}" oninput="clearHiddenField();">
+
+                    <input id="func_id" type="hidden" name="funcId" th:field="*{funcionario.id}">
+                    <div th:if="${erro != null}" class="text-danger" th:text="${erro}"></div>
+
+                    <button class="btn btn-success mt-3" type="submit">Salvar</button>
+                    <a th:href="@{/usuarios}" class="btn btn-danger mt-3">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

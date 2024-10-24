@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -50,7 +51,8 @@ public class Macaco implements Serializable {
     @DecimalMin(value = "0.0", inclusive = false)
     private BigDecimal precoUnitario;
 
-
+    @OneToMany(mappedBy = "produto")
+    private List<ItensVenda> itensVenda;
 
     public Long getId() {
         return id;

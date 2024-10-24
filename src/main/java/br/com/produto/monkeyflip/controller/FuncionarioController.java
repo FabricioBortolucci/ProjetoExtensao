@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class FuncionarioController {
 
+    private final FuncionarioService funcionarioService;
+
     @Autowired
-    private FuncionarioService funcionarioService;
+    public FuncionarioController(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
+    }
 
     @GetMapping("/funcionarios")
     public String funcionariosList(HttpServletRequest request, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {

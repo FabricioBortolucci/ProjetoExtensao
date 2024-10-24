@@ -3,17 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>875</IntrospectionStateNumber>
+      <IntrospectionStateNumber>920</IntrospectionStateNumber>
       <ServerVersion>16.4</ServerVersion>
-      <StartupTime>1728145540</StartupTime>
+      <StartupTime>1728645023</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -114,7 +106,7 @@ false America/Argentina/San_Luis
 false America/Argentina/Tucuman
 false America/Argentina/Ushuaia
 false America/Aruba
-false America/Asuncion
+true America/Asuncion
 false America/Atikokan
 true America/Atka
 false America/Bahia
@@ -685,7 +677,7 @@ false PST
 true PST8PDT
 false PWT
 true PYST
-false PYT
+true PYT
 false Pacific/Apia
 true Pacific/Auckland
 false Pacific/Bougainville
@@ -808,7 +800,7 @@ false Zulu
 14643||10|C|G
 14643||-9223372036854775808|U|G
 14643||10|U|G</Grants>
-      <IntrospectionStateNumber>875</IntrospectionStateNumber>
+      <IntrospectionStateNumber>920</IntrospectionStateNumber>
       <ObjectId>16398</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4232,13 +4224,21 @@ false Zulu
     <schema id="264" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>875</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-10-05.17:46:06</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>920</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-10-11.14:16:03</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <sequence id="265" parent="264" name="funcionario_id_seq">
+    <sequence id="265" parent="264" name="conta_receber_id_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>16481</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>914</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="266" parent="264" name="funcionario_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>16437</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
@@ -4246,7 +4246,15 @@ false Zulu
       <StateNumber>871</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="266" parent="264" name="macaco_monk_id_seq">
+    <sequence id="267" parent="264" name="itens_venda_id_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>16452</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>896</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="268" parent="264" name="macaco_monk_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>16425</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
@@ -4254,7 +4262,7 @@ false Zulu
       <StateNumber>798</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="267" parent="264" name="macaco_seq">
+    <sequence id="269" parent="264" name="macaco_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>16424</ObjectId>
       <SequenceIdentity>1+50</SequenceIdentity>
@@ -4262,7 +4270,7 @@ false Zulu
       <StateNumber>782</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="268" parent="264" name="usuario_seq">
+    <sequence id="270" parent="264" name="usuario_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>16416</ObjectId>
       <SequenceIdentity>1+50</SequenceIdentity>
@@ -4270,25 +4278,121 @@ false Zulu
       <StateNumber>755</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="269" parent="264" name="funcionario">
+    <sequence id="271" parent="264" name="venda_id_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>16458</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>897</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="272" parent="264" name="venda_parcela_id_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>16487</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>916</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <table id="273" parent="264" name="conta_receber">
+      <ObjectId>16482</ObjectId>
+      <StateNumber>917</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="274" parent="264" name="funcionario">
       <ObjectId>16438</ObjectId>
       <StateNumber>874</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="270" parent="264" name="macaco">
-      <ObjectId>16426</ObjectId>
-      <StateNumber>852</StateNumber>
+    <table id="275" parent="264" name="itens_venda">
+      <ObjectId>16453</ObjectId>
+      <StateNumber>898</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="271" parent="264" name="usuario">
+    <table id="276" parent="264" name="macaco">
+      <ObjectId>16426</ObjectId>
+      <StateNumber>898</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="277" parent="264" name="usuario">
       <ObjectId>16409</ObjectId>
       <StateNumber>874</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="272" parent="269" name="id">
+    <table id="278" parent="264" name="venda">
+      <ObjectId>16459</ObjectId>
+      <StateNumber>915</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="279" parent="264" name="venda_parcela">
+      <ObjectId>16488</ObjectId>
+      <StateNumber>918</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="280" parent="273" name="id">
+      <DasType>bigint|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>914</StateNumber>
+      <SequenceId>16481</SequenceId>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="281" parent="273" name="cr_data_vencimento">
+      <DasType>timestamp(6)|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>914</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="282" parent="273" name="cr_pago">
+      <DasType>boolean|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>914</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="283" parent="273" name="cr_valor">
+      <DasType>numeric(38,2 digit)|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>914</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="284" parent="273" name="venda_id">
+      <DasType>bigint|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>914</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="285" parent="273" name="fkcyh05v6sjp8lmy0bomm4rs9tp">
+      <ColNames>venda_id</ColNames>
+      <ObjectId>16493</ObjectId>
+      <StateNumber>917</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16459</RefTableId>
+    </foreign-key>
+    <index id="286" parent="273" name="conta_receber_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16485</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>914</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="287" parent="273" name="conta_receber_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16486</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>914</StateNumber>
+      <UnderlyingIndexId>16485</UnderlyingIndexId>
+    </key>
+    <column id="288" parent="274" name="id">
       <DasType>bigint|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -4297,38 +4401,38 @@ false Zulu
       <SequenceId>16437</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="273" parent="269" name="func_cpf">
+    <column id="289" parent="274" name="func_cpf">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
       <StateNumber>871</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="274" parent="269" name="func_nome">
+    <column id="290" parent="274" name="func_nome">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
       <StateNumber>871</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="275" parent="269" name="func_tel">
+    <column id="291" parent="274" name="func_tel">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
       <StateNumber>871</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="276" parent="269" name="usuario_id">
+    <column id="292" parent="274" name="usuario_id">
       <DasType>bigint|0s</DasType>
       <Position>5</Position>
       <StateNumber>871</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="277" parent="269" name="fkwnmqfjh318guaklwmtu9nnma">
+    <foreign-key id="293" parent="274" name="fkwnmqfjh318guaklwmtu9nnma">
       <ColNames>usuario_id</ColNames>
       <ObjectId>16447</ObjectId>
       <StateNumber>874</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>16409</RefTableId>
     </foreign-key>
-    <index id="278" parent="269" name="funcionario_pkey">
+    <index id="294" parent="274" name="funcionario_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16443</ObjectId>
@@ -4337,32 +4441,95 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="279" parent="269" name="ukp0htu9jav6vq5l5dliq4muqg7">
+    <index id="295" parent="274" name="ukp0htu9jav6vq5l5dliq4muqg7">
       <ColNames>usuario_id</ColNames>
       <ObjectId>16445</ObjectId>
       <StateNumber>873</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="280" parent="269" name="funcionario_pkey">
+    <key id="296" parent="274" name="funcionario_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16444</ObjectId>
       <Primary>1</Primary>
       <StateNumber>871</StateNumber>
       <UnderlyingIndexId>16443</UnderlyingIndexId>
     </key>
-    <key id="281" parent="269" name="ukp0htu9jav6vq5l5dliq4muqg7">
+    <key id="297" parent="274" name="ukp0htu9jav6vq5l5dliq4muqg7">
       <ObjectId>16446</ObjectId>
       <StateNumber>873</StateNumber>
       <UnderlyingIndexId>16445</UnderlyingIndexId>
     </key>
-    <check id="282" parent="270" name="macaco_monk_quantidade_check">
+    <column id="298" parent="275" name="id">
+      <DasType>bigint|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>896</StateNumber>
+      <SequenceId>16452</SequenceId>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="299" parent="275" name="itv_preco_unitario">
+      <DasType>numeric(38,2 digit)|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>896</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="300" parent="275" name="itv_quantidade">
+      <DasType>integer|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>896</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="301" parent="275" name="produto_id">
+      <DasType>bigint|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>896</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="302" parent="275" name="venda_id">
+      <DasType>bigint|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>896</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="303" parent="275" name="fkssyrr1nyyc0hdrlvq65wsfq1q">
+      <ColNames>produto_id</ColNames>
+      <ObjectId>16468</ObjectId>
+      <StateNumber>898</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16426</RefTableId>
+    </foreign-key>
+    <foreign-key id="304" parent="275" name="fkfvivokqub75o9uctx9g1ipgab">
+      <ColNames>venda_id</ColNames>
+      <ObjectId>16473</ObjectId>
+      <StateNumber>899</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16459</RefTableId>
+    </foreign-key>
+    <index id="305" parent="275" name="itens_venda_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16456</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>896</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="306" parent="275" name="itens_venda_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16457</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>896</StateNumber>
+      <UnderlyingIndexId>16456</UnderlyingIndexId>
+    </key>
+    <check id="307" parent="276" name="macaco_monk_quantidade_check">
       <ColNames>monk_quantidade</ColNames>
       <ObjectId>16436</ObjectId>
       <Predicate>monk_quantidade &gt;= 1</Predicate>
       <StateNumber>852</StateNumber>
     </check>
-    <column id="283" parent="270" name="monk_id">
+    <column id="308" parent="276" name="monk_id">
       <DasType>bigint|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -4371,43 +4538,43 @@ false Zulu
       <SequenceId>16425</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="284" parent="270" name="monk_especie">
+    <column id="309" parent="276" name="monk_especie">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
       <StateNumber>798</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="285" parent="270" name="monk_idade">
+    <column id="310" parent="276" name="monk_idade">
       <DasType>integer|0s</DasType>
       <Position>3</Position>
       <StateNumber>798</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="286" parent="270" name="monk_nome">
+    <column id="311" parent="276" name="monk_nome">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
       <StateNumber>798</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="287" parent="270" name="monk_peso">
+    <column id="312" parent="276" name="monk_peso">
       <DasType>double precision|0s</DasType>
       <Position>5</Position>
       <StateNumber>798</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="288" parent="270" name="monk_preco_unitario">
+    <column id="313" parent="276" name="monk_preco_unitario">
       <DasType>numeric(38,2 digit)|0s</DasType>
       <Position>6</Position>
       <StateNumber>851</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <column id="289" parent="270" name="monk_quantidade">
+    <column id="314" parent="276" name="monk_quantidade">
       <DasType>integer|0s</DasType>
       <Position>7</Position>
       <StateNumber>852</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="290" parent="270" name="macaco_pkey">
+    <index id="315" parent="276" name="macaco_pkey">
       <ColNames>monk_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16431</ObjectId>
@@ -4416,33 +4583,33 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="291" parent="270" name="macaco_pkey">
+    <key id="316" parent="276" name="macaco_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16432</ObjectId>
       <Primary>1</Primary>
       <StateNumber>798</StateNumber>
       <UnderlyingIndexId>16431</UnderlyingIndexId>
     </key>
-    <column id="292" parent="271" name="id">
+    <column id="317" parent="277" name="id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>754</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="293" parent="271" name="usu_nome">
+    <column id="318" parent="277" name="usu_nome">
       <DasType>varchar(255)|0s</DasType>
       <Position>7</Position>
       <StateNumber>766</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="294" parent="271" name="usu_senha">
+    <column id="319" parent="277" name="usu_senha">
       <DasType>varchar(255)|0s</DasType>
       <Position>8</Position>
       <StateNumber>767</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="295" parent="271" name="usuario_pkey">
+    <index id="320" parent="277" name="usuario_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16414</ObjectId>
@@ -4451,12 +4618,190 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="296" parent="271" name="usuario_pkey">
+    <key id="321" parent="277" name="usuario_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16415</ObjectId>
       <Primary>1</Primary>
       <StateNumber>754</StateNumber>
       <UnderlyingIndexId>16414</UnderlyingIndexId>
+    </key>
+    <check id="322" parent="278" name="venda_plano_pagamento_check">
+      <ColNames>plano_pagamento</ColNames>
+      <ObjectId>16462</ObjectId>
+      <Predicate>(plano_pagamento)::text = ANY ((ARRAY[&apos;A&apos;::character varying, &apos;P&apos;::character varying])::text[])</Predicate>
+      <StateNumber>897</StateNumber>
+    </check>
+    <check id="323" parent="278" name="venda_tipo_pagamento_check">
+      <ColNames>tipo_pagamento</ColNames>
+      <ObjectId>16463</ObjectId>
+      <Predicate>(tipo_pagamento)::text = ANY ((ARRAY[&apos;PIX&apos;::character varying, &apos;CARTAO_CREDITO&apos;::character varying, &apos;CARTAO_DEBITO&apos;::character varying])::text[])</Predicate>
+      <StateNumber>897</StateNumber>
+    </check>
+    <check id="324" parent="278" name="venda_ven_plano_pagamento_check">
+      <ColNames>ven_plano_pagamento</ColNames>
+      <ObjectId>16478</ObjectId>
+      <Predicate>(ven_plano_pagamento)::text = ANY ((ARRAY[&apos;A&apos;::character varying, &apos;P&apos;::character varying])::text[])</Predicate>
+      <StateNumber>909</StateNumber>
+    </check>
+    <check id="325" parent="278" name="venda_ven_status_check">
+      <ColNames>ven_status</ColNames>
+      <ObjectId>16479</ObjectId>
+      <Predicate>(ven_status)::text = ANY ((ARRAY[&apos;CRIADA&apos;::character varying, &apos;ANDAMENTO&apos;::character varying, &apos;FINALIZADA&apos;::character varying])::text[])</Predicate>
+      <StateNumber>910</StateNumber>
+    </check>
+    <check id="326" parent="278" name="venda_ven_tipo_pagamento_check">
+      <ColNames>ven_tipo_pagamento</ColNames>
+      <ObjectId>16480</ObjectId>
+      <Predicate>(ven_tipo_pagamento)::text = ANY ((ARRAY[&apos;PIX&apos;::character varying, &apos;CARTAO_CREDITO&apos;::character varying, &apos;CARTAO_DEBITO&apos;::character varying])::text[])</Predicate>
+      <StateNumber>911</StateNumber>
+    </check>
+    <column id="327" parent="278" name="id">
+      <DasType>bigint|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>897</StateNumber>
+      <SequenceId>16458</SequenceId>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="328" parent="278" name="data_venda">
+      <DasType>timestamp(6)|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>897</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="329" parent="278" name="plano_pagamento">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>897</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="330" parent="278" name="tipo_pagamento">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>897</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="331" parent="278" name="ven_valor_total">
+      <DasType>numeric(38,2 digit)|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>897</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="332" parent="278" name="ven_plano_pagamento">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>909</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="333" parent="278" name="ven_status">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>7</Position>
+      <StateNumber>910</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="334" parent="278" name="ven_tipo_pagamento">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>8</Position>
+      <StateNumber>911</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="335" parent="278" name="ven_usu_finalizouu_venda">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>9</Position>
+      <StateNumber>912</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="336" parent="278" name="ven_quant_parcelas">
+      <DasType>integer|0s</DasType>
+      <Position>10</Position>
+      <StateNumber>915</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="337" parent="278" name="venda_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16466</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>897</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="338" parent="278" name="venda_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16467</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>897</StateNumber>
+      <UnderlyingIndexId>16466</UnderlyingIndexId>
+    </key>
+    <column id="339" parent="279" name="id">
+      <DasType>bigint|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>916</StateNumber>
+      <SequenceId>16487</SequenceId>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="340" parent="279" name="vp_data_vencimento">
+      <DasType>timestamp(6)|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>916</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="341" parent="279" name="vp_pago">
+      <DasType>boolean|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>916</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="342" parent="279" name="valor_parcela">
+      <DasType>numeric(38,2 digit)|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>916</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="343" parent="279" name="conta_receber_id">
+      <DasType>bigint|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>916</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="344" parent="279" name="venda_id">
+      <DasType>bigint|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>916</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="345" parent="279" name="fkjk4l186nh1l5q7hda81a7fm26">
+      <ColNames>conta_receber_id</ColNames>
+      <ObjectId>16498</ObjectId>
+      <StateNumber>918</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16482</RefTableId>
+    </foreign-key>
+    <foreign-key id="346" parent="279" name="fk2bdw8qevol0icum6rwdyvkb8n">
+      <ColNames>venda_id</ColNames>
+      <ObjectId>16503</ObjectId>
+      <StateNumber>919</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16459</RefTableId>
+    </foreign-key>
+    <index id="347" parent="279" name="venda_parcela_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16491</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>916</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="348" parent="279" name="venda_parcela_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16492</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>916</StateNumber>
+      <UnderlyingIndexId>16491</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

@@ -1,6 +1,7 @@
 package br.com.produto.monkeyflip.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
 
@@ -12,9 +13,11 @@ public class Funcionario {
     private Long id;
 
     @Column(name = "func_nome")
+    @NotBlank(message = "O nome não pode ser nulo")
     private String nome;
 
     @Column(name = "func_cpf")
+    @NotBlank(message = "O cpf não pode ser nulo")
     private String cpf;
 
     @Column(name = "func_tel")
@@ -23,6 +26,14 @@ public class Funcionario {
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    public Funcionario() {
+    }
+
+    public Funcionario(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
     public Long getId() {
         return id;

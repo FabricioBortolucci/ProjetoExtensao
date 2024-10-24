@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
 @Service
 public class MacacoService {
 
@@ -20,11 +18,6 @@ public class MacacoService {
     }
 
     public void salvar(Macaco macaco) {
-        if (macaco.getQuantidade() > 1) {
-            BigDecimal novoValor = macaco.getPrecoUnitario().multiply(new BigDecimal(macaco.getQuantidade()));
-            macaco.setPrecoUnitario(novoValor);
-        }
-
         repository.save(macaco);
     }
 

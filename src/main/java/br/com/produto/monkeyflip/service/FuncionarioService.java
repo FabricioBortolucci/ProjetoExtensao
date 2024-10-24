@@ -1,12 +1,15 @@
 package br.com.produto.monkeyflip.service;
 
 import br.com.produto.monkeyflip.model.Funcionario;
-import br.com.produto.monkeyflip.model.Macaco;
 import br.com.produto.monkeyflip.repository.IFuncionario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FuncionarioService {
@@ -33,7 +36,15 @@ public class FuncionarioService {
         repository.deleteById(id);
     }
 
-    public Funcionario buscarPorId(Long id) {
-        return repository.findById(id).orElse(null);
+    public Optional<Funcionario> buscarPorId(Long id) {
+        return repository.findById(id);
     }
+
+    public List<Funcionario> buscarPorNome(String termo) {
+        return repository.findByNomeContainingIgnoreCaseAndUsuarioIsNull(termo)
+                .stream()
+                .map(f -> new Funcionario(f.getId(), f.getNome()))
+                .collect(Collectors.toList());
+    }
+
 }

@@ -1,6 +1,7 @@
 package br.com.produto.monkeyflip.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
 
@@ -12,12 +13,14 @@ public class Usuario {
     private Long id;
 
     @Column(name = "usu_nome")
+    @NotBlank(message = "O nome de usuário não pode ser nulo")
     private String usuNome;
 
     @Column(name = "usu_senha")
+    @NotBlank(message = "A senha não pode ser nula")
     private String usuSenha;
 
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "usuario", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Funcionario funcionario;
 
     public Long getId() {
@@ -57,7 +60,7 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(id, usuario.id) && Objects.equals(usuNome, usuario.usuNome) && Objects.equals(usuSenha, usuario.usuSenha) && Objects.equals(funcionario, usuario.funcionario);
+        return Objects.equals(id, usuario.id);
     }
 
     @Override

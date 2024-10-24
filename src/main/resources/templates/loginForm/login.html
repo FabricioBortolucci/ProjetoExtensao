@@ -19,7 +19,7 @@
         <title>Login - MonkeyFlip</title>
     </head>
     <body>
-    <form id="userForm" action="/logar" method="post">
+    <form id="userForm" th:action="@{/logar}" th:object="${loginUser}" method="post">
         <section class="vh-100">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -32,7 +32,7 @@
                                 <!-- Campo de Login -->
                                 <div class="form-floating mb-4">
                                     <input type="text" name="usuNome" id="typeUsuX-2"
-                                           class="form-control form-control-lg"
+                                           class="form-control form-control-lg" th:field="*{usuNome}"
                                            placeholder=" " required>
                                     <label for="typeUsuX-2">Login do usuário</label>
                                 </div>
@@ -40,7 +40,7 @@
                                 <!-- Campo de Senha -->
                                 <div class="form-floating mb-4">
                                     <input type="password" name="usuSenha" id="typePasswordX-2"
-                                           class="form-control form-control-lg"
+                                           class="form-control form-control-lg" th:field="*{usuSenha}"
                                            placeholder=" " required>
                                     <label for="typePasswordX-2">Senha</label>
                                 </div>
