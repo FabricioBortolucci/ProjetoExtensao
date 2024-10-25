@@ -44,7 +44,7 @@
                     <input type="hidden" th:field="*{id}"/>
 
                     <label class="form-label" for="vendData">Data da realização da venda</label>
-                    <input type="date" class="form-control w-50" id="vendData" th:field="*{data}"/>
+                    <input type="date" class="form-control w-50" id="vendData" th:field="*{data}" th:value="venda.data"/>
                     <div th:if="${#fields.hasErrors('data')}" th:errors="*{data}" class="text-danger"></div>
 
 

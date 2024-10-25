@@ -2,6 +2,7 @@ package br.com.produto.monkeyflip.service;
 
 import br.com.produto.monkeyflip.model.Funcionario;
 import br.com.produto.monkeyflip.repository.IFuncionario;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +35,10 @@ public class FuncionarioService {
 
     public void excluir(Long id) {
         repository.deleteById(id);
+    }
+
+    public void excluirReferenciaUsuario(Integer id) {
+        repository.updateReferencia(id);
     }
 
     public Optional<Funcionario> buscarPorId(Long id) {

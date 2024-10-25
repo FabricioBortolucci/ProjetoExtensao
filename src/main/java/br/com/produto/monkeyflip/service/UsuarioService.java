@@ -42,6 +42,7 @@ public class UsuarioService {
     }
 
     public void excluir(Long id) {
+        funcionarioService.excluirReferenciaUsuario(Integer.parseInt(String.valueOf(id)));
         repository.deleteById(id);
     }
 
