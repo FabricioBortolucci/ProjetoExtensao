@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Controller
 @CrossOrigin("*")
@@ -48,8 +47,8 @@ public class VendaController {
     @GetMapping("/vendas/novo")
     public String formVendas(Model model) {
         Venda venda = new Venda();
-
         venda.setData(LocalDate.now());
+
         model.addAttribute("venda", venda);
 
         model.addAttribute("tipoPagamentos", TipoPagamento.values());
@@ -71,7 +70,6 @@ public class VendaController {
         return "redirect:/vendas";
     }
 
-
     @GetMapping("/vendas/excluir/{id}")
     public String excluirVenda(@PathVariable Long id, Model model) {
         vendaService.excluir(id);
@@ -83,5 +81,22 @@ public class VendaController {
         model.addAttribute("isEdit", true);
         model.addAttribute("venda", vendaService.buscarPorId(id));
         return "vendForm/vendCad";
+    }
+
+    @PostMapping("vendas/filtrarTipos")
+    @ResponseBody
+    public List<Map<String, String>> filtrarTipoPagamento(@RequestBody PlanoPagamento planoPagamento){
+        PlanoPagamento plano = PlanoPagamento.valueOf(String.valueOf(planoPagamento));
+        List<TipoPagamento> list = TipoPagamento.buscarTiposPorPlano(plano);
+
+        // Convertendo para uma lista de mapas para enviar ao JavaScript
+        List<Map<String, String>> result = new ArrayList<>();
+        for (TipoPagamento tipo : list) {
+            Map<String, String> tipoMap = new HashMap<>();
+            tipoMap.put("value", tipo.name()); // Nome do enum como valor
+            tipoMap.put("descricao", tipo.descricao); // Descrição do tipo
+            result.add(tipoMap);
+        }
+        return result;
     }
 }

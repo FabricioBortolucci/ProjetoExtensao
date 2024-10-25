@@ -16,12 +16,15 @@
 
     <style>
         html, body {
-            height: 100%;
+            height: auto;
         }
 
 
         .bg-dark {
-            height: 100vh; /* 100% da altura da viewport */
+            position: sticky; /* ou fixed, dependendo do comportamento desejado */
+            top: 0;           /* Alinha ao topo da página */
+            height: auto;     /* Ajusta a altura ao conteúdo */
+            overflow-y: auto; /* Permite rolagem se o conteúdo exceder a altura da tela */
         }
 
         .bd-placeholder-img {

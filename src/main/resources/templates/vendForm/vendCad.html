@@ -24,48 +24,78 @@
         input[type=number] {
             -moz-appearance: textfield;
         }
+
+        html, body {
+            height: 100%; /* Garante que o body preencha 100% da altura da viewport */
+            margin: 0; /* Remove margens padrão */
+        }
+        .bg-dark {
+            height: auto;
+            min-height: 100vh; /* Garante que o menu ocupe pelo menos 100% da altura da viewport */
+            overflow-y: auto; /* Permite que o menu role se o conteúdo exceder a altura */
+        }
+        .main-content {
+            flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
+        }
     </style>
 
     <title th:text="${isEdit} ? 'Alterar' : 'Cadastrar'"></title>
 </head>
 <body>
 <div class="d-flex">
-    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0 bg-dark">
     </div>
 
-    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
         <div class="container">
-
             <h2 class="mt-5 mb-4">Formulário para realizar venda</h2>
 
             <form action="#" th:action="@{/vendas/salvar}" method="post" th:object="${venda}"
-                  class="form-control pt-2  w-75">
+                  class="form-control pt-2 pb-4 w-75">
                 <div class="form-group">
                     <input type="hidden" th:field="*{id}"/>
 
                     <label class="form-label" for="vendData">Data da realização da venda</label>
-                    <input type="date" class="form-control w-50" id="vendData" th:field="*{data}" th:value="venda.data"/>
+                    <input type="date" class="form-control w-25" id="vendData" th:field="*{data}" th:value="${#temporals.format(venda.data, 'yyyy-MM-dd')}"/>
                     <div th:if="${#fields.hasErrors('data')}" th:errors="*{data}" class="text-danger"></div>
 
+                    <br/>
 
                     <label for="planoPag">Plano de Pagamento</label>
-                    <select class="form-select show-tick w-75" th:field="*{planoPagamento}" id="planoPag">
+                    <select class="form-select show-tick w-50" th:field="*{planoPagamento}" id="planoPag">
                         <option value="">Nada Selecionado</option>
                         <option th:each="plano : ${planoPagamentos}"
                                 th:value="${plano}"
-                                th:text="${plano.descricao}">
-                        </option>
+                                th:text="${plano.descricao}"></option>
                     </select>
+
+                    <br/>
 
                     <label for="tipoPag">Tipo de Pagamento</label>
-                    <select class="form-select show-tick w-75" th:field="*{tipoPagamento}" id="tipoPag">
+                    <select class="form-select show-tick w-50" th:field="*{tipoPagamento}" id="tipoPag">
                         <option value="">Nada Selecionado</option>
-                        <option th:each="tipo : ${tipoPagamentos}"
-                                th:value="${tipo}"
-                                th:text="${tipo.descricao}">
-                        </option>
                     </select>
 
+                    <br/>
+
+                    <div id="parcelasContainer" style="display: none;">
+                        <label for="numParcelas">Número de Parcelas</label>
+
+                        <div class="input-group w-25">
+                            <input type="number" class="form-control" id="numParcelas" min="1"/>
+                            <button id="gerarButton" class="btn btn-primary" type="button">Gerar</button>
+                        </div>
+                        <br/>
+                        <table id="resultTable" class="table w-25" style="display: none;">
+                            <thead class="table-light sticky-top table-dark">
+                            <tr>
+                                <th>Parcela</th>
+                                <th>Valor</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
 
                     <button class="btn btn-success mt-3" type="submit"
                             th:text="${isEdit} ? 'Atualizar' : 'Salvar'"></button>
@@ -92,6 +122,79 @@
         });
     });
 </script>-->
+
+<script>
+    document.getElementById("planoPag").addEventListener("change", function() {
+        var planoPagamento = this.value;
+
+        // Envia uma requisição POST para filtrar os tipos de pagamento
+        fetch('/vendas/filtrarTipos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(planoPagamento)
+        })
+            .then(response => response.json())
+            .then(data => {
+                const tipoPag = document.getElementById("tipoPag");
+                tipoPag.innerHTML = '<option value="">Nada Selecionado</option>';
+
+                data.forEach(tipo => {
+                    const option = document.createElement("option");
+                    option.value = tipo.value;
+                    option.text = tipo.descricao;
+                    tipoPag.add(option);
+                });
+            })
+            .catch(error => console.error('Erro:', error));
+    });
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Adiciona um evento de mudança no select de plano de pagamento
+        document.getElementById("tipoPag").addEventListener("change", function() {
+            var tipoPagamento = this.value;
+
+            // Verifica se o plano selecionado é "A PRAZO"
+            if (tipoPagamento === 'CARTAO_CREDITO') {
+                document.getElementById("parcelasContainer").style.display = "block";
+            } else {
+                document.getElementById("parcelasContainer").style.display = "none";
+                document.getElementById("resultTable").style.display = "none"; // Oculta a tabela
+            }
+        });
+
+        // Função para gerar e preencher a tabela
+        document.getElementById("gerarButton").addEventListener("click", function() {
+            event.preventDefault();
+
+            var numParcelas = document.getElementById("numParcelas").value;
+            var tbody = document.getElementById("resultTable").querySelector("tbody");
+            tbody.innerHTML = ""; // Limpa a tabela anterior
+
+            // Lógica para calcular e preencher a tabela de parcelas
+            for (let i = 1; i <= numParcelas; i++) {
+                var row = document.createElement("tr");
+                var cell1 = document.createElement("td");
+                var cell2 = document.createElement("td");
+
+                cell1.textContent = `Parcela ${i}`;
+                cell2.textContent = `R$ ${(1000 / numParcelas).toFixed(2)}`; // Exemplo: substitua pelo valor total
+
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+                tbody.appendChild(row);
+            }
+
+            document.getElementById("resultTable").style.display = "table"; // Mostra a tabela
+        });
+    });
+
+</script>
+
+
 
 
 </body>

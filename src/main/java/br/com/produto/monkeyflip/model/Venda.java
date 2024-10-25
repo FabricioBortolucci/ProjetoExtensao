@@ -4,6 +4,7 @@ import br.com.produto.monkeyflip.model.enums.PlanoPagamento;
 import br.com.produto.monkeyflip.model.enums.StatusVenda;
 import br.com.produto.monkeyflip.model.enums.TipoPagamento;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Venda {
     private Long id;
 
     @Column(name = "data_venda")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
