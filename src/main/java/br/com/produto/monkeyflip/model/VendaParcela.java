@@ -1,9 +1,10 @@
 package br.com.produto.monkeyflip.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -20,7 +21,11 @@ public class VendaParcela {
     private boolean pago;
 
     @Column(name = "vp_data_vencimento")
-    private Date dataVencimento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataVencimento;
+
+    @Column(name = "vp_numparcela")
+    private int numparcela;
 
     @ManyToOne
     @JoinColumn(name = "conta_receber_id")
@@ -30,6 +35,17 @@ public class VendaParcela {
     @JoinColumn(name = "venda_id")
     private Venda venda;
 
+    public VendaParcela(BigDecimal valorParcela, boolean pago, LocalDate dataVencimento, Venda venda, int numparcela) {
+        this.valorParcela = valorParcela;
+        this.pago = pago;
+        this.dataVencimento = dataVencimento;
+        this.venda = venda;
+        this.numparcela = numparcela;
+    }
+
+    public VendaParcela() {
+
+    }
 
     public Long getId() {
         return id;
@@ -55,11 +71,11 @@ public class VendaParcela {
         this.pago = pago;
     }
 
-    public Date getDataVencimento() {
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(Date dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
@@ -77,6 +93,14 @@ public class VendaParcela {
 
     public void setVenda(Venda venda) {
         this.venda = venda;
+    }
+
+    public int getNumparcela() {
+        return numparcela;
+    }
+
+    public void setNumparcela(int numparcela) {
+        this.numparcela = numparcela;
     }
 
     @Override

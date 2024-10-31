@@ -6,9 +6,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.List;
+
 @Repository
 public interface IMacaco extends JpaRepository<Macaco, Long> {
     Page<Macaco> findAllByOrderById(Pageable pageable);
 
 
+    List<Macaco> findByNomeContainingIgnoreCase(String termo);
 }

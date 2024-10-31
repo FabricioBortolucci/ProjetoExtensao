@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,6 +52,9 @@ public class Venda {
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VendaParcela> parcelas;
 
+
+    private Long macacoId; // ID do macaco
+    private String precoMacaco;
 
     public Long getId() {
         return id;
@@ -140,6 +142,22 @@ public class Venda {
 
     public void setParcelas(List<VendaParcela> parcelas) {
         this.parcelas = parcelas;
+    }
+
+    public Long getMacacoId() {
+        return macacoId;
+    }
+
+    public void setMacacoId(Long macacoId) {
+        this.macacoId = macacoId;
+    }
+
+    public String getPrecoMacaco() {
+        return precoMacaco;
+    }
+
+    public void setPrecoMacaco(String precoMacaco) {
+        this.precoMacaco = precoMacaco;
     }
 
     @Override

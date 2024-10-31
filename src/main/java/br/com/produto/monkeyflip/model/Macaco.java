@@ -54,6 +54,15 @@ public class Macaco implements Serializable {
     @OneToMany(mappedBy = "produto")
     private List<ItensVenda> itensVenda;
 
+    public Macaco() {
+    }
+
+    public Macaco(Long id, String nome, BigDecimal precoUnitario) {
+        this.id = id;
+        this.nome = nome;
+        this.precoUnitario = precoUnitario;
+    }
+
     public Long getId() {
         return id;
     }

@@ -21,7 +21,6 @@ public enum TipoPagamento {
         return switch (planoPagamento) {
             case A -> Arrays.asList(PIX, CARTAO_CREDITO, CARTAO_DEBITO);
             case P -> Arrays.asList(CARTAO_CREDITO);
-            default -> Collections.emptyList();
         };
     }
 

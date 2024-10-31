@@ -1,11 +1,15 @@
 package br.com.produto.monkeyflip.service;
 
+import br.com.produto.monkeyflip.model.Funcionario;
 import br.com.produto.monkeyflip.model.Macaco;
 import br.com.produto.monkeyflip.repository.IMacaco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MacacoService {
@@ -27,5 +31,12 @@ public class MacacoService {
 
     public Macaco buscarPorId(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    public List<Macaco> buscarPorNome(String termo) {
+        return repository.findByNomeContainingIgnoreCase(termo)
+                .stream()
+                .map(m -> new Macaco(m.getId(), m.getNome(), m.getPrecoUnitario()))
+                .collect(Collectors.toList());
     }
 }
