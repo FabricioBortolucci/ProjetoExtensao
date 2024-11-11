@@ -38,7 +38,7 @@ public class Macaco implements Serializable {
 
     @Column(name = "monk_quantidade")
     @NotNull(message = "A quantidade não pode ser nula ou menor que 1.")
-    @Min(value = 1)
+    @Min(value = 0)
     private Integer quantidade;
 
     @Column(name = "monk_peso")
@@ -57,10 +57,11 @@ public class Macaco implements Serializable {
     public Macaco() {
     }
 
-    public Macaco(Long id, String nome, BigDecimal precoUnitario) {
+    public Macaco(Long id, String nome, BigDecimal precoUnitario, Integer quantidade) {
         this.id = id;
         this.nome = nome;
         this.precoUnitario = precoUnitario;
+        this.quantidade = quantidade;
     }
 
     public Long getId() {

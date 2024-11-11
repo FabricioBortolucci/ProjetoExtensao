@@ -1,0 +1,93 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Simple_Blue" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d71a6611-f574-4fa6-89b6-55a6e50c28e9">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="monkeyflip"/>
+	<parameter name="filtro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<query language="SQL"><![CDATA[select m.monk_id,
+       m.monk_nome,
+       m.monk_especie,
+       m.monk_quantidade
+from macaco m
+  		$P!{filtro} 
+order by m.monk_quantidade desc]]></query>
+	<field name="monk_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="monk_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="monk_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="macaco"/>
+	</field>
+	<field name="monk_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="monk_nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="monk_nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="macaco"/>
+	</field>
+	<field name="monk_especie" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="monk_especie"/>
+		<property name="com.jaspersoft.studio.field.label" value="monk_especie"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="macaco"/>
+	</field>
+	<field name="monk_quantidade" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="monk_quantidade"/>
+		<property name="com.jaspersoft.studio.field.label" value="monk_quantidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="macaco"/>
+	</field>
+	<background height="13"/>
+	<title height="72">
+		<element kind="frame" uuid="8bb969ce-7135-4d33-a064-f4c67bfdae99" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#437D59">
+			<element kind="staticText" uuid="1af99cc6-401a-41b8-b601-4ddfd4496114" x="10" y="50" width="140" height="22" forecolor="#FFFFFF" fontSize="16.0" bold="true">
+				<text><![CDATA[Relatório Estoque]]></text>
+			</element>
+			<element kind="staticText" uuid="d6aad37a-284c-4030-aca8-c709a9239800" x="10" y="10" width="114" height="20" forecolor="#FFFFFF" fontSize="14.0" bold="false" hTextAlign="Right">
+				<text><![CDATA[MonkeyFlip - Ltd.]]></text>
+			</element>
+		</element>
+	</title>
+	<pageHeader height="13">
+		<element kind="line" uuid="f7d0fdcc-1336-4789-8283-6f216ead46ee" positionType="FixRelativeToBottom" x="0" y="6" width="555" height="1"/>
+	</pageHeader>
+	<columnHeader height="20">
+		<element kind="staticText" uuid="2bd2dc9c-c432-4dae-8d6d-fd733690a071" key="" mode="Transparent" x="110" y="0" width="50" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[ID]]></text>
+			<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+		</element>
+		<element kind="staticText" uuid="37cf5714-03a1-4cce-ba37-9ceadc09888d" x="160" y="0" width="90" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Nome]]></text>
+		</element>
+		<element kind="staticText" uuid="4effb645-0de7-42c6-9f78-4e89fda996ed" x="250" y="0" width="100" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Espécie]]></text>
+		</element>
+		<element kind="staticText" uuid="8b1d8d7d-3ddb-4dac-ab3a-fe4259847a68" x="350" y="0" width="90" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Quantidade]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="18">
+			<element kind="textField" uuid="7900e25c-2de8-426d-aa49-b4aa481d8198" x="110" y="0" width="50" height="18" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{monk_id}]]></expression>
+			</element>
+			<element kind="textField" uuid="8424a3d5-65e8-40c0-bedb-c159764f84d6" x="160" y="0" width="90" height="18" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{monk_nome}]]></expression>
+			</element>
+			<element kind="textField" uuid="84e35ca2-8ac1-415c-93cd-5fcdb156d8ef" x="250" y="0" width="100" height="18" pattern="dd/MM/yyyy" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{monk_especie}]]></expression>
+			</element>
+			<element kind="textField" uuid="bab79dde-3927-4805-85ba-404694853c18" x="350" y="0" width="90" height="18" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{monk_quantidade}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter/>
+	<pageFooter height="17">
+		<element kind="textField" uuid="55631f61-08a6-4269-8202-fe17905de8ad" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" hTextAlign="Right">
+			<expression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></expression>
+		</element>
+		<element kind="textField" uuid="75fded56-37de-4939-b623-17a12cb7e12f" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" evaluationTime="Report">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="862df795-f873-4215-b228-55ae75473cfb" x="0" y="4" width="100" height="13" pattern="dd/MM/yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</pageFooter>
+	<summary/>
+</jasperReport>

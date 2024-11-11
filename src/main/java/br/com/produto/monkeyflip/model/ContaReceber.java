@@ -1,8 +1,11 @@
 package br.com.produto.monkeyflip.model;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +21,12 @@ public class ContaReceber {
     private BigDecimal valor;
 
     @Column(name = "cr_data_vencimento")
-    private Date dataVencimento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataVencimento;
+
+    @Column(name = "cr_data_pagamento")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataPagamento;
 
     @Column(name = "cr_pago")
     private boolean pago;
@@ -47,11 +55,11 @@ public class ContaReceber {
         this.valor = valor;
     }
 
-    public Date getDataVencimento() {
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(Date dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
@@ -77,6 +85,14 @@ public class ContaReceber {
 
     public void setParcelas(List<VendaParcela> parcelas) {
         this.parcelas = parcelas;
+    }
+
+    public LocalDate getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
 
     @Override

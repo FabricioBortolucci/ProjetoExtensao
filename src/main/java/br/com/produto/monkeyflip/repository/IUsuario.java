@@ -16,4 +16,7 @@ public interface IUsuario extends JpaRepository<Usuario, Long> {
 
     Page<Usuario> findAllByOrderById(Pageable pageable);
 
+    @Query(value = "select u.usu_nome from usuario u where u.id = :id", nativeQuery = true)
+    String buscarNome(@Param("id") Long id);
+
 }

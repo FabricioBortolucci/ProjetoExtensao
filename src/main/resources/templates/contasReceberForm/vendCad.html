@@ -76,7 +76,6 @@
                     <label class="form-label mt-3" for="prod_search">Selecione o macaco</label>
                     <input type="text" class="form-control w-50" id="prod_search" name="prodName"
                            oninput="clearHiddenField();">
-                    <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
                     <input id="prod_id" type="hidden" name="prodId" th:field="*{macacoId}">
 
                     <br/>
@@ -250,32 +249,21 @@
                         term: request.term
                     },
                     success: function (data) {
-                        response(data);
+                        response(data); // O retorno deve ser um array de objetos { label, value, preco }
                     }
                 });
             },
             minLength: 2,
             select: function (event, ui) {
-                if (ui.item.estoque <= 0) {
-                    // Exibe mensagem de erro se o estoque for zero
-                    $("#error-message").text("Produto indisponível em estoque.").show();
-                    $("#prod_search").val(''); // Limpa o campo de busca
-                    $("#prod_id").val(''); // Limpa o campo oculto do ID
-                    $("#prod_preco").val(''); // Limpa o campo de preço
-                    $("#precoMacaco").val(''); // Limpa o campo de preço oculto
-                } else {
-                    // Preenche os campos com os dados do produto
-                    $("#prod_search").val(ui.item.label);
-                    $("#prod_id").val(ui.item.id);
-                    $("#prod_preco").val(ui.item.preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}));
-                    $("#precoMacaco").val(ui.item.preco);
-                    $("#error-message").hide(); // Oculta a mensagem de erro
-                }
-                return false;
+                this.value = ui.item.label; // Exibe o nome do macaco no campo de busca
+                $("#prod_id").val(ui.item.id); // O ID do macaco é armazenado no hidden field
+                $("#prod_preco").val(ui.item.preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})); // O preço é armazenado no campo de preço
+                $("#precoMacaco").val(ui.item.preco); // Armazena o preço em um campo oculto
+                return false; // Para evitar que o valor padrão do autocomplete seja adicionado
             }
+
         });
     });
-
 
 
     function clearHiddenField() {

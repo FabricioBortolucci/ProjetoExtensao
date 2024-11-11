@@ -3,6 +3,7 @@ package br.com.produto.monkeyflip.model;
 import br.com.produto.monkeyflip.model.enums.PlanoPagamento;
 import br.com.produto.monkeyflip.model.enums.StatusVenda;
 import br.com.produto.monkeyflip.model.enums.TipoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -50,6 +51,7 @@ public class Venda {
     private List<ContaReceber> contasReceber;
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<VendaParcela> parcelas;
 
 

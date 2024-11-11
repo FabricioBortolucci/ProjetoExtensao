@@ -36,7 +36,7 @@ public class MacacoService {
     public List<Macaco> buscarPorNome(String termo) {
         return repository.findByNomeContainingIgnoreCase(termo)
                 .stream()
-                .map(m -> new Macaco(m.getId(), m.getNome(), m.getPrecoUnitario()))
+                .map(m -> new Macaco(m.getId(), m.getNome(), m.getPrecoUnitario(), m.getQuantidade()))
                 .collect(Collectors.toList());
     }
 }

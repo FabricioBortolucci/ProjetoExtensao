@@ -6,7 +6,9 @@ import br.com.produto.monkeyflip.model.enums.TipoPagamento;
 import br.com.produto.monkeyflip.service.ItensVendaService;
 import br.com.produto.monkeyflip.service.MacacoService;
 import br.com.produto.monkeyflip.service.VendaService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -70,13 +72,25 @@ public class VendaController {
     @PostMapping("/vendas/salvar")
     public String salvarVendas(@Valid @ModelAttribute("venda") Venda venda,
                                BindingResult result,
-                               Model model) {
+                               Model model,
+                               HttpSession session,
+                               HttpServletRequest request) {
         if (result.hasErrors()) {
             model.addAttribute("venda", venda);
             return "vendForm/vendCad";
         }
 
-        vendaService.salvar(venda);
+        String userId = null;
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("usuarioId")) {
+                userId = cookie.getValue();
+                break;
+            }
+        }
+
+        List<VendaParcela> parcelas = (List<VendaParcela>) session.getAttribute("parcelasCalculadas");
+        if (parcelas == null) parcelas = new ArrayList<>();
+        vendaService.salvar(venda, parcelas, userId);
         return "redirect:/vendas";
     }
 
@@ -122,6 +136,7 @@ public class VendaController {
                     map.put("label", monk.getNome());
                     map.put("id", monk.getId());
                     map.put("preco", monk.getPrecoUnitario());
+                    map.put("estoque", monk.getQuantidade());
                     return map;
                 })
                 .collect(Collectors.toList());
@@ -133,7 +148,8 @@ public class VendaController {
             @RequestParam("precoMacaco") BigDecimal precoMacaco,
             @RequestParam("quantParcelas") int quantParcelas,
             @RequestParam("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataVencimento,
-            @ModelAttribute("venda") Venda venda) {
+            @ModelAttribute("venda") Venda venda,
+            HttpSession session) {
 
         venda.setParcelas(new ArrayList<>());
         if (venda.getMacacoId() == null) {
@@ -157,7 +173,8 @@ public class VendaController {
             dataVencimento = dataVencimento.plusDays(30);
         }
 
-        venda.setParcelas(parcelas);
+        session.setAttribute("parcelasCalculadas", parcelas);
+        session.setAttribute("precoMacaco", precoMacaco);
         return ResponseEntity.ok(parcelas);
     }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebars.js"></script>
+    <style>
+
+        /* table.transparent-table {
+             background-color: transparent !important; !* Torna o fundo da tabela transparente *!
+             border: none !important; !* Remove bordas, se necessário *!
+         }
+
+         table.transparent-table th,
+         table.transparent-table td {
+             background-color: transparent !important; !* Torna o fundo das células transparente *!
+         }*/
+
+
+    </style>
+    <title>Relatório</title>
+</head>
+<body>
+<div class="d-flex">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0"></div>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="container-fluid mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <h3 class="h3">Relatório de Estoque</h3>
+                    <form th:action="@{/gerar-relatorio-estoque}" method="get" target="_blank">
+
+                        <div class="mb-3">
+                            <label for="monkId" class="form-label">ID do Macaco</label>
+                            <input type="number" class="form-control w-25" id="monkId" name="monkId">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gerar relatório</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

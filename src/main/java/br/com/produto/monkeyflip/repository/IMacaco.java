@@ -15,4 +15,6 @@ public interface IMacaco extends JpaRepository<Macaco, Long> {
 
 
     List<Macaco> findByNomeContainingIgnoreCase(String termo);
+
+    Macaco getMacacoById(Long id);
 }
