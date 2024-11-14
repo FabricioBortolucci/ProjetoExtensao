@@ -70,7 +70,7 @@
                     <input type="date" class="form-control w-25" id="vendData" th:field="*{data}"
                            th:value="${#temporals.format(venda.data, 'yyyy-MM-dd')}"/>
                     <div th:if="${#fields.hasErrors('data')}" th:errors="*{data}" class="text-danger"></div>
-
+                    <div th:if="${macacoDataErro != null}" class="text-danger" th:text="${macacoDataErro}"></div>
                     <br/>
 
                     <label class="form-label mt-3" for="prod_search">Selecione o macaco</label>

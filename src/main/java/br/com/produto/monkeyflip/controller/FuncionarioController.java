@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @CrossOrigin("*")
@@ -58,7 +59,12 @@ public class FuncionarioController {
     }
 
     @GetMapping("/funcionarios/excluir/{id}")
-    public String excluirFuncionario(@PathVariable Long id, Model model) {
+    public String excluirFuncionario(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        if (funcionarioService.funcionarioRelacionadoUsuario(id)) {
+            redirectAttributes.addFlashAttribute("erroExcluir", true);
+            return "redirect:/funcionarios";
+        }
+
         funcionarioService.excluir(id);
         return "redirect:/funcionarios";
     }

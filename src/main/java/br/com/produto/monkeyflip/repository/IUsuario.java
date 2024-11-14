@@ -19,4 +19,5 @@ public interface IUsuario extends JpaRepository<Usuario, Long> {
     @Query(value = "select u.usu_nome from usuario u where u.id = :id", nativeQuery = true)
     String buscarNome(@Param("id") Long id);
 
+    boolean existsByFuncionario_Id(Long id);
 }

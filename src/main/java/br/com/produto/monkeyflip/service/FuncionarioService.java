@@ -2,6 +2,7 @@ package br.com.produto.monkeyflip.service;
 
 import br.com.produto.monkeyflip.model.Funcionario;
 import br.com.produto.monkeyflip.repository.IFuncionario;
+import br.com.produto.monkeyflip.repository.IUsuario;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,9 @@ public class FuncionarioService {
 
     @Autowired
     private IFuncionario repository;
+
+    @Autowired
+    private IUsuario usuarioRepository;
 
 
     public Page<Funcionario> paginacaoListarTodos(Pageable pageable) {
@@ -50,6 +54,10 @@ public class FuncionarioService {
                 .stream()
                 .map(f -> new Funcionario(f.getId(), f.getNome()))
                 .collect(Collectors.toList());
+    }
+
+    public boolean funcionarioRelacionadoUsuario(Long id) {
+        return usuarioRepository.existsByFuncionario_Id(id);
     }
 
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebars.js"></script>
+
+    <title>Suporte Sério</title>
+</head>
+<body>
+<div class="d-flex">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0"></div>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+        <div class="container-fluid mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+
+                    <div class="container mt-5">
+                        <div class="row">
+                            <!-- Pessoa 1 -->
+                            <div class="col-md-6 mb-4">
+                                <div class="d-flex align-items-center border p-3">
+                                    <!-- Foto -->
+                                    <div class="me-3">
+                                        <img src="/images/midia.jpg" alt="Foto da Pessoa 1" class="rounded-circle"  width="250" height="190">
+                                    </div>
+                                    <!-- Contatos -->
+                                    <div>
+                                        <h5>Chico Banana</h5>
+                                        <p>Email: bananachico.suporte@gmail.com</p>
+                                        <p>Telefone: (92) 2975-0221</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pessoa 2 -->
+                            <div class="col-md-6 mb-4">
+                                <div class="d-flex align-items-center border p-3">
+                                    <!-- Foto -->
+                                    <div class="me-3">
+                                        <img src="/images/sagui.png" alt="Foto da Pessoa 2" class="rounded-circle"  width="250" height="190">
+                                    </div>
+                                    <!-- Contatos -->
+                                    <div>
+                                        <h5>Lee Harvey Oswald</h5>
+                                        <p>Email: oswald.suporte@outlook.com</p>
+                                        <p>Telefone: (92) 98422-3895</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

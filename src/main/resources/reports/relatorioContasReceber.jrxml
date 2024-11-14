@@ -57,8 +57,17 @@ ORDER BY
 			<element kind="staticText" uuid="1af99cc6-401a-41b8-b601-4ddfd4496114" x="10" y="50" width="250" height="22" forecolor="#FFFFFF" fontSize="16.0" bold="true">
 				<text><![CDATA[Parcelas Recebidas e a Receber]]></text>
 			</element>
-			<element kind="staticText" uuid="d6aad37a-284c-4030-aca8-c709a9239800" x="10" y="10" width="114" height="20" forecolor="#FFFFFF" fontSize="14.0" bold="false" hTextAlign="Right">
+			<element kind="staticText" uuid="d6aad37a-284c-4030-aca8-c709a9239800" x="10" y="10" width="110" height="20" forecolor="#FFFFFF" fontSize="14.0" bold="false" hTextAlign="Right">
 				<text><![CDATA[MonkeyFlip - Ltd.]]></text>
+			</element>
+			<element kind="staticText" uuid="8db2b55c-6338-41d1-bf15-bbab65c808b5" x="450" y="0" width="144" height="90" forecolor="#FFFFFF" hTextAlign="Center">
+				<text><![CDATA[MonkeyFlip  Ltd.
+Rua: Avenida Brasil, nº 987
+Bairro: Centro
+CEP: 69005-123
+Cidade: Manaus
+Estado: Amazonas (AM)
+Brasil]]></text>
 			</element>
 		</element>
 	</title>

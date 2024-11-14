@@ -41,6 +41,15 @@ order by m.monk_quantidade desc]]></query>
 			<element kind="staticText" uuid="d6aad37a-284c-4030-aca8-c709a9239800" x="10" y="10" width="114" height="20" forecolor="#FFFFFF" fontSize="14.0" bold="false" hTextAlign="Right">
 				<text><![CDATA[MonkeyFlip - Ltd.]]></text>
 			</element>
+			<element kind="staticText" uuid="a5d49120-0d7c-4cee-aae6-a575ba846479" x="450" y="0" width="144" height="90" forecolor="#FFFFFF" hTextAlign="Center">
+				<text><![CDATA[MonkeyFlip  Ltd.
+Rua: Avenida Brasil, nº 987
+Bairro: Centro
+CEP: 69005-123
+Cidade: Manaus
+Estado: Amazonas (AM)
+Brasil]]></text>
+			</element>
 		</element>
 	</title>
 	<pageHeader height="13">

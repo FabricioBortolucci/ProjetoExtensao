@@ -87,6 +87,12 @@ public class VendaController {
                 break;
             }
         }
+        if (venda.getData() == null || venda.getData().isBefore(LocalDate.now())) {
+            model.addAttribute("macacoDataErro", "A data está nula ou é menor que a data atual");
+            model.addAttribute("tipoPagamentos", TipoPagamento.values());
+            model.addAttribute("planoPagamentos", PlanoPagamento.values());
+            return "vendForm/vendCad";
+        }
         if (venda.getMacacoId() == null) {
             model.addAttribute("macacoIdErro", "Id do macaco está nulo");
             model.addAttribute("tipoPagamentos", TipoPagamento.values());

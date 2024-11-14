@@ -14,4 +14,11 @@ public class HomeController extends AbstractController {
     public String home(Model model) {
         return "fragments/home";
     }
+
+    @GetMapping("/suporte")
+    public String suporte(Model model) {
+        return "suporte/suporteView";
+    }
+
+
 }
