@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebars.js"></script>
+    <style>
+
+        /* table.transparent-table {
+             background-color: transparent !important; !* Torna o fundo da tabela transparente *!
+             border: none !important; !* Remove bordas, se necessário *!
+         }
+
+         table.transparent-table th,
+         table.transparent-table td {
+             background-color: transparent !important; !* Torna o fundo das células transparente *!
+         }*/
+
+
+    </style>
+    <title>Visualizar</title>
+</head>
+<body>
+<div class="d-flex">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0 bg-dark">
+    </div>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+        <div class="container">
+            <h2 class="mt-5 mb-4" th:text="${'Conta Receber ' + contaReceber.id}"></h2>
+
+            <form action="#" th:action="@{/contasReceber/visualizar}" method="post" th:object="${contaReceber}"
+                  class="form-control pt-2 pb-4 w-75">
+                <div class="form-group">
+                    <p th:text="'Conta Receber Id: ' + ${id}"/>
+                    <p th:text="'Venda Id: ' + ${contaReceber.venda.id}"/>
+                    <p th:text="'Data de vencimento: ' + ${#temporals.format(contaReceber.dataVencimento, 'dd/MM/yyyy')}"/>
+                    <p th:text="'Pago?: ' + ${contaReceber.pago ? 'Sim' : 'Não'}"/>
+                    <p th:text="'Data de pagamento: ' + ${#temporals.format(contaReceber.dataPagamento, 'dd/MM/yyyy') != null ? #temporals.format(contaReceber.dataPagamento, 'dd/MM/yyyy') : 'Não Pago'}"/>
+                    <p th:text="'Valor: R$' + ${#numbers.formatDecimal(contaReceber.valor, 1,'POINT', 2, 'COMMA')}"/>
+
+
+                        <table title="Parcelas" id="Parcelas" class="table w-25 table-bordered" th:if="${!contaReceber.parcelas.isEmpty()}">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Número Parcela</th>
+                                <th>Conta Receber ID</th>
+                                <th>Valor</th>
+                                <th>Data Vencimento</th>
+                                <th>Pago</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p : ${venda.parcelas}">
+                                <td th:text="${p.numparcela}"></td>
+                                <td th:text="${p.contaReceber}"></td>
+                                <td th:text="'R$' + ${#numbers.formatDecimal(p.valorParcela, 1,'POINT', 2, 'COMMA')}"></td>
+                                <td th:text="${#temporals.format(p.dataVencimento, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${p.pago ? 'Sim' : 'Não'}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    <a th:href="@{/contasReceber}" class="btn btn-danger mt-3">Voltar</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

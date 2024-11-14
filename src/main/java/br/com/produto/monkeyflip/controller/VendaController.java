@@ -49,11 +49,12 @@ public class VendaController {
     public String listaVendas(HttpServletRequest request, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<Venda> macacosPage = vendaService.paginacaoListarTodos(pageable);
+        Page<Venda> vendaPage = vendaService.paginacaoListarTodos(pageable);
 
-        model.addAttribute("vendaList", macacosPage.getContent());
+        model.addAttribute("vendaList", vendaPage.getContent());
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", macacosPage.getTotalPages());
+        model.addAttribute("totalPages", vendaPage.getTotalPages());
+        model.addAttribute("size", vendaPage.getSize());
         return "vendForm/venList";
     }
 
@@ -217,6 +218,24 @@ public class VendaController {
                 .collect(Collectors.toList()));
         model.addAttribute("venda", venda);
         return "vendForm/venView";
+    }
+
+    @PostMapping("/vendas/buscarvendas")
+    public String buscarVendas(@RequestParam("idpesquisa") String idpesquisa, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Venda> vendaPage = vendaService.buscarVendasPorId(pageable, idpesquisa);
+
+
+        model.addAttribute("vendaList", vendaPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", vendaPage.getTotalPages());
+        model.addAttribute("size", vendaPage.getSize());
+        if (idpesquisa.isEmpty()) {
+            return "redirect:/vendas";
+        }
+
+        return "vendForm/venList";
     }
 
 

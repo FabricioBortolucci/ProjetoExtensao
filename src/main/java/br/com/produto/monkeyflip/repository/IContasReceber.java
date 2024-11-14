@@ -21,4 +21,8 @@ public interface IContasReceber extends JpaRepository<ContaReceber, Long> {
     @Transactional
     @Query("UPDATE ContaReceber cr SET cr.pago = true WHERE cr.id = :id")
     void atualizarStatusPago(@Param("id") Long id);
+
+    @Transactional
+    @Query(nativeQuery = true, value = "SELECT * FROM conta_receber cr WHERE cr.venda_id = :id")
+    Page<ContaReceber> buscarContasComIdVenda(Pageable pageable, @Param("id") Long id);
 }

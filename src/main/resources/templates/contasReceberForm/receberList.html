@@ -6,19 +6,16 @@
     <link href="/css/sidebars.css" rel="stylesheet">
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/sidebars.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
-
-        /* table.transparent-table {
-             background-color: transparent !important; !* Torna o fundo da tabela transparente *!
-             border: none !important; !* Remove bordas, se necessário *!
-         }
-
-         table.transparent-table th,
-         table.transparent-table td {
-             background-color: transparent !important; !* Torna o fundo das células transparente *!
-         }*/
-
-
+        /* Estilo opcional para centralizar os filtros */
+        .filter-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+            margin-top: 5px;
+        }
     </style>
     <title>Listagem</title>
 </head>
@@ -27,7 +24,6 @@
     <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0"></div>
 
     <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
         <div class="container-fluid mt-4">
             <div class="row justify-content-center">
                 <div class="col-md-12">
@@ -37,7 +33,15 @@
                         <thead class="table-light sticky-top table-dark" style="top: 0;">
                         <tr>
                             <th>ID</th>
-                            <th>Venda Id</th>
+                            <th>
+                                Venda Id
+                                <form th:action="@{/contasReceber/buscarcontas}" method="post" class="d-flex align-items-center">
+                                    <label for="idpesquisa" class="mr-2"></label>
+                                    <input class="form-control w-50 pt-1 mt-1" id="idpesquisa" name="idpesquisa" placeholder="Pesquisar...">
+                                    <input type="submit" class="filter-input btn btn-primary ml-2 w-25" id="filterVendaId" value="Filtrar">
+                                </form>
+
+                            </th>
                             <th>Data Vencimento</th>
                             <th>Valor</th>
                             <th>Pago</th>
@@ -55,14 +59,13 @@
                             <td th:text="${cr.venda.planoPagamento.descricao}"></td>
                             <td>
                                 <a th:href="@{/contasReceber/alterarPago/{id}(id=${cr.id})}" th:if="${!cr.pago}" class="btn btn-success">Finalizar</a>
+                                <a th:href="@{/contasReceber/visualizar/{id}(id=${cr.id})}" class="btn btn-primary">Visualizar</a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
 
-
                     <div class="d-flex align-items-center mt-4">
-
                         <div class="mx-auto">
                             <nav>
                                 <ul class="pagination justify-content-center">
@@ -84,8 +87,6 @@
                             </nav>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>

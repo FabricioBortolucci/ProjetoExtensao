@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ContaReceberService {
@@ -33,6 +34,10 @@ public class ContaReceberService {
         return repository.findAllByOrderById(pageable);
     }
 
+    public ContaReceber buscarPorId(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public void updateParaPago(Long id) {
         repository.atualizarStatusPago(id);
 //        ContaReceber contaReceber = repository.findById(id).get();
@@ -48,5 +53,12 @@ public class ContaReceberService {
             repository.save(conta);
         });
 
+    }
+
+    public Page<ContaReceber> buscarContaPorVendaId(Pageable pageable,String idpesquisa) {
+        if (idpesquisa.isEmpty()) {
+            return repository.findAllByOrderById(pageable);
+        }
+        return repository.buscarContasComIdVenda(pageable, Long.parseLong(idpesquisa));
     }
 }

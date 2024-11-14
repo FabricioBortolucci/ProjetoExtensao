@@ -139,4 +139,11 @@ public class VendaService {
     public Venda buscarPorId(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    public Page<Venda> buscarVendasPorId(Pageable pageable, String idpesquisa) {
+        if (idpesquisa.isEmpty()) {
+            return repository.findAllByOrderById(pageable);
+        }
+        return repository.buscarContasComIdVenda(pageable, Long.parseLong(idpesquisa));
+    }
 }
