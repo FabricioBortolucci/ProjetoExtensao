@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @CrossOrigin("*")
@@ -57,7 +58,13 @@ public class MacacoController {
 
 
     @GetMapping("/macacos/excluir/{id}")
-    public String excluirMacaco(@PathVariable Long id, Model model) {
+    public String excluirMacaco(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+
+        if (macacoService.macacoRelacionadoComVenda(id)) {
+            redirectAttributes.addFlashAttribute("erroExcluir", true);
+            return "redirect:/macacos";
+        }
+
         macacoService.excluir(id);
         return "redirect:/macacos";
     }

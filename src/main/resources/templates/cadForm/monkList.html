@@ -20,11 +20,21 @@
 
 
     </style>
+    <script>
+        function mostrarToastErro() {
+            var toastElement = document.getElementById('toastErro');
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+
+    </script>
     <title>Listagem</title>
 </head>
 <body>
 <div class="d-flex">
     <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0"></div>
+
+
 
     <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
@@ -63,6 +73,22 @@
                         </tbody>
                     </table>
 
+                    <!-- Toast de Erro (Aviso flutuante) -->
+                    <div id="toastErro" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 20px; right: 20px; z-index: 1050;">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                <strong>Erro!</strong> Este macaco não pode ser excluído, pois está relacionado a uma venda.
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                    <!-- Mostrar o Toast se houver um erro -->
+                    <div th:if="${erroExcluir}">
+                        <script>
+                            mostrarToastErro();
+                        </script>
+                    </div>
 
                     <div class="d-flex align-items-center mt-4">
                         <div class="me-3">
