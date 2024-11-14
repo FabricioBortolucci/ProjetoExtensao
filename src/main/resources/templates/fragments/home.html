@@ -181,6 +181,14 @@
                         Relatório Macacos
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link text-white carregar-pagina" href="/relatorioVendas">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#toggles2"/>
+                        </svg>
+                        Relatório Vendas
+                    </a>
+                </li>
             </ul>
             <hr>
             <div class="dropdown">
@@ -193,13 +201,13 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                     <li>
-                        <form th:action="@{/sair}" method="get">
-                            <button type="submit" class="dropdown-item">Sair</button>
+                        <form th:action="@{/suporte}" method="get">
+                            <button type="submit" class="dropdown-item">Suporte</button>
                         </form>
                     </li>
                     <li>
-                        <form th:action="@{/suporte}" method="get">
-                            <button type="submit" class="dropdown-item">Suporte</button>
+                        <form th:action="@{/sair}" method="get">
+                            <button type="submit" class="dropdown-item">Sair</button>
                         </form>
                     </li>
                 </ul>

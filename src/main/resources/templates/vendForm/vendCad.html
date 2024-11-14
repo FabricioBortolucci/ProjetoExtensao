@@ -83,7 +83,7 @@
                     <br/>
 
                     <label class="form-label mt-3" for="prod_preco">Preço do Macaco</label>
-                    <input type="text" class="form-control w-50" id="prod_preco" name="prodPreco" readonly>
+                    <input type="text" class="form-control w-50" id="prod_preco" name="prodPreco" >
                     <input type="hidden" th:field="*{precoMacaco}" id="precoMacaco"/>
 
                     <br/>
@@ -161,6 +161,15 @@
             removeMaskOnSubmit: true
         });
     });*/
+
+    document.getElementById("prod_preco").addEventListener("input", function() {
+        var preco = document.getElementById("prod_preco").value;
+
+        // Remover símbolo de moeda "R$" e outros caracteres não numéricos
+        preco = preco.replace(/[^\d,.-]/g, '').replace(",", "."); // Remove tudo que não é número, ponto ou vírgula
+
+        document.getElementById("precoMacaco").value = preco;
+    });
 
     function gerarParcelas() {
         const numParcelas = document.getElementById("numParcelas").value;

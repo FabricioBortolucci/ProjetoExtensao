@@ -39,6 +39,7 @@
                     <p th:text="'Data de vencimento: ' + ${#temporals.format(contaReceber.dataVencimento, 'dd/MM/yyyy')}"/>
                     <p th:text="'Pago?: ' + ${contaReceber.pago ? 'Sim' : 'Não'}"/>
                     <p th:text="'Data de pagamento: ' + ${#temporals.format(contaReceber.dataPagamento, 'dd/MM/yyyy') != null ? #temporals.format(contaReceber.dataPagamento, 'dd/MM/yyyy') : 'Não Pago'}"/>
+                    <p th:text="'Métodos de pagamento venda: ' + ${contaReceber.venda.planoPagamento.descricao} + ' - ' + ${contaReceber.venda.tipoPagamento.descricao}"/>
                     <p th:text="'Valor: R$' + ${#numbers.formatDecimal(contaReceber.valor, 1,'POINT', 2, 'COMMA')}"/>
 
 

@@ -113,14 +113,17 @@ public class VendaController {
             return "vendForm/vendCad";
         }
         List<VendaParcela> parcelas = (List<VendaParcela>) session.getAttribute("parcelasCalculadas");
-        if (parcelas == null) {
-            model.addAttribute("parcelaErro", "Gere as parcelas");
-            model.addAttribute("tipoPagamentos", TipoPagamento.values());
-            model.addAttribute("planoPagamentos", PlanoPagamento.values());
-            return "vendForm/vendCad";
+        if (!venda.getPlanoPagamento().equals(PlanoPagamento.A)) {
+            if (parcelas == null) {
+                model.addAttribute("parcelaErro", "Gere as parcelas");
+                model.addAttribute("tipoPagamentos", TipoPagamento.values());
+                model.addAttribute("planoPagamentos", PlanoPagamento.values());
+                return "vendForm/vendCad";
+            }
         }
 
         vendaService.salvar(venda, parcelas, userId);
+        session.removeAttribute("parcelasCalculadas");
         return "redirect:/vendas";
     }
 

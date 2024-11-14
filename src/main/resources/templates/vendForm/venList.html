@@ -60,6 +60,7 @@
                             <td th:text="${venda.tipoPagamento.descricao}"></td>
                             <td>
                                 <a th:href="@{/vendas/visualizar/{id}(id=${venda.id})}" class="btn btn-primary">Visualizar</a>
+                                <a th:href="@{/vendas/excluir/{id}(id=${venda.id})}" class="btn btn-primary">excluir</a>
                             </td>
                         </tr>
                         </tbody>

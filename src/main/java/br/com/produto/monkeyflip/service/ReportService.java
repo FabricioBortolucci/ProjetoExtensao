@@ -25,6 +25,9 @@ public class ReportService {
     @Value("classpath:/reports/relatorioEstoque.jrxml")
     private Resource reportEstoqueResource;
 
+    @Value("classpath:/reports/relatorioVenda.jrxml")
+    private Resource reportVendaResource;
+
     // Método para gerar e preencher o relatório de Contas a Receber
     public JasperPrint gerarRelatorioContasReceber(Map<String, Object> parametros) throws JRException, IOException, SQLException {
         return gerarRelatorio(reportContasReceberResource, parametros);
@@ -33,6 +36,10 @@ public class ReportService {
     // Método para gerar e preencher o relatório de Estoque
     public JasperPrint gerarRelatorioEstoque(Map<String, Object> parametros) throws JRException, IOException, SQLException {
         return gerarRelatorio(reportEstoqueResource, parametros);
+    }
+
+    public JasperPrint gerarRelatorioVenda(Map<String, Object> parametros) throws JRException, IOException, SQLException {
+        return gerarRelatorio(reportVendaResource, parametros);
     }
 
     // Método genérico para gerar e preencher relatórios

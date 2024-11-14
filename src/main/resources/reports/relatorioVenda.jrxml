@@ -1,0 +1,145 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Simple_Blue" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d71a6611-f574-4fa6-89b6-55a6e50c28e9">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="monkeyflip"/>
+	<parameter name="filtro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<query language="SQL"><![CDATA[select v.id,
+       v.data_venda,
+       iv.itv_preco_unitario,
+       iv.itv_quantidade,
+       v.ven_status,
+       v.ven_tipo_pagamento,
+       v.ven_plano_pagamento,
+       v.ven_usu_finalizouu_venda
+from venda v
+         inner join itens_venda iv on v.id = iv.venda_id
+ $P!{filtro} 
+order by v.id]]></query>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="data_venda" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="data_venda"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_venda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="itv_preco_unitario" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="itv_preco_unitario"/>
+		<property name="com.jaspersoft.studio.field.label" value="itv_preco_unitario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="itens_venda"/>
+	</field>
+	<field name="itv_quantidade" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="itv_quantidade"/>
+		<property name="com.jaspersoft.studio.field.label" value="itv_quantidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="itens_venda"/>
+	</field>
+	<field name="ven_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ven_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="ven_status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="ven_tipo_pagamento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ven_tipo_pagamento"/>
+		<property name="com.jaspersoft.studio.field.label" value="ven_tipo_pagamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="ven_plano_pagamento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ven_plano_pagamento"/>
+		<property name="com.jaspersoft.studio.field.label" value="ven_plano_pagamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="ven_usu_finalizouu_venda" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ven_usu_finalizouu_venda"/>
+		<property name="com.jaspersoft.studio.field.label" value="ven_usu_finalizouu_venda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<background height="78"/>
+	<title height="72">
+		<element kind="frame" uuid="8bb969ce-7135-4d33-a064-f4c67bfdae99" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#437D59">
+			<element kind="staticText" uuid="1af99cc6-401a-41b8-b601-4ddfd4496114" x="10" y="50" width="140" height="22" forecolor="#FFFFFF" fontSize="16.0" bold="true">
+				<text><![CDATA[Relatório Venda]]></text>
+			</element>
+			<element kind="staticText" uuid="d6aad37a-284c-4030-aca8-c709a9239800" x="10" y="10" width="114" height="20" forecolor="#FFFFFF" fontSize="14.0" bold="false" hTextAlign="Right">
+				<text><![CDATA[MonkeyFlip - Ltd.]]></text>
+			</element>
+			<element kind="staticText" uuid="a5d49120-0d7c-4cee-aae6-a575ba846479" x="450" y="0" width="144" height="90" forecolor="#FFFFFF" hTextAlign="Center">
+				<text><![CDATA[MonkeyFlip  Ltd.
+Rua: Avenida Brasil, nº 987
+Bairro: Centro
+CEP: 69005-123
+Cidade: Manaus
+Estado: Amazonas (AM)
+Brasil]]></text>
+			</element>
+		</element>
+	</title>
+	<pageHeader height="13">
+		<element kind="line" uuid="f7d0fdcc-1336-4789-8283-6f216ead46ee" positionType="FixRelativeToBottom" x="0" y="6" width="555" height="1"/>
+	</pageHeader>
+	<columnHeader height="20">
+		<element kind="staticText" uuid="2bd2dc9c-c432-4dae-8d6d-fd733690a071" key="" mode="Transparent" x="0" y="0" width="30" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[ID]]></text>
+			<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+		</element>
+		<element kind="staticText" uuid="37cf5714-03a1-4cce-ba37-9ceadc09888d" x="30" y="0" width="80" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Data da Venda]]></text>
+		</element>
+		<element kind="staticText" uuid="4effb645-0de7-42c6-9f78-4e89fda996ed" x="110" y="0" width="70" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Valor]]></text>
+		</element>
+		<element kind="staticText" uuid="8b1d8d7d-3ddb-4dac-ab3a-fe4259847a68" x="180" y="0" width="80" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Status]]></text>
+		</element>
+		<element kind="staticText" uuid="ecb2a086-47d6-4f53-96ab-064b06dc24f2" x="260" y="0" width="100" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Tipo Pagamento]]></text>
+		</element>
+		<element kind="staticText" uuid="bbe24748-4446-4fbf-b218-279a2db43b78" x="360" y="0" width="90" height="20" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Plano Pagamento]]></text>
+		</element>
+		<element kind="staticText" uuid="f4d2dbf1-557d-4550-9cb9-6880292229a5" x="450" y="0" width="104" height="20" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[ Finalizou a Venda]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="18">
+			<element kind="textField" uuid="7900e25c-2de8-426d-aa49-b4aa481d8198" x="0" y="0" width="30" height="18" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{id}]]></expression>
+			</element>
+			<element kind="textField" uuid="8424a3d5-65e8-40c0-bedb-c159764f84d6" x="110" y="0" width="70" height="18" pattern="¤#,#00.00#;¤(#,#00.00#-)" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{itv_preco_unitario}]]></expression>
+			</element>
+			<element kind="textField" uuid="bab79dde-3927-4805-85ba-404694853c18" x="260" y="0" width="100" height="18" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ven_tipo_pagamento}.equals("PIX") ? "PIX" : $F{ven_tipo_pagamento}.equals("CARTAO_CREDITO") ? "Cartão de Crédito" : "Cartão de Débito"]]></expression>
+			</element>
+			<element kind="textField" uuid="7036a6ea-6f70-44e1-96fb-d3aed392a911" x="30" y="0" width="80" height="18" pattern="dd/MM/yyyy" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{data_venda}]]></expression>
+			</element>
+			<element kind="textField" uuid="80e76950-0795-4582-9913-60ec5b926f95" x="180" y="0" width="80" height="18" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ven_status}.equals("FINALIZADA") ? "Finalizada" : ""]]></expression>
+			</element>
+			<element kind="textField" uuid="49c527f4-099f-4036-b127-a493b55c95f7" x="360" y="0" width="90" height="18" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ven_plano_pagamento}.equals("P") ? "Parcelado" : "À Vista"]]></expression>
+			</element>
+			<element kind="textField" uuid="02254032-1a32-4397-abf9-ff5e64c63fc4" x="450" y="0" width="104" height="18" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ven_usu_finalizouu_venda}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter/>
+	<pageFooter height="17">
+		<element kind="textField" uuid="55631f61-08a6-4269-8202-fe17905de8ad" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" hTextAlign="Right">
+			<expression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></expression>
+		</element>
+		<element kind="textField" uuid="75fded56-37de-4939-b623-17a12cb7e12f" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" evaluationTime="Report">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="862df795-f873-4215-b228-55ae75473cfb" x="0" y="4" width="100" height="13" pattern="dd/MM/yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</pageFooter>
+	<summary/>
+</jasperReport>

@@ -31,6 +31,11 @@ public class ReportController {
         return "relatorios/relatorioEstoque";
     }
 
+    @GetMapping("/relatorioVendas")
+    public String relatorioVendas(Model model) {
+        return "relatorios/relatorioVenda";
+    }
+
     @GetMapping("/gerar-relatorio-contasreceber")
     public void gerarRelatorioContasReceber(@RequestParam(required = false) String dataInicial,
                                             @RequestParam(required = false) String dataFinal,
@@ -85,6 +90,40 @@ public class ReportController {
         byte[] pdfBytes = reportService.exportarRelatorioParaPDF(jasperPrint);
 
         configurarRespostaPDF(response, pdfBytes, "relatorio_estoque.pdf");
+    }
+
+    @GetMapping("/gerar-relatorio-venda")
+    public void gerarRelatorioVenda(
+            @RequestParam(required = false) String dataInicial,
+            @RequestParam(required = false) String dataFinal,
+            @RequestParam(required = false) Long venId,
+            HttpServletResponse response) throws Exception {
+        Map<String, Object> parametros = new HashMap<>();
+        String filtro = "";
+        boolean temCondicao = false;
+
+        if (!dataInicial.isEmpty() && !dataFinal.isEmpty()) {
+            filtro += " v.data_venda BETWEEN '" + dataInicial + "' AND '" + dataFinal + "'";
+            temCondicao = true;
+        }
+
+        if (venId != null) {
+            if (temCondicao) {
+                filtro += " AND ";
+            }
+            filtro += " v.id = '" + venId + "'";
+        }
+
+        if (!filtro.isEmpty()) {
+            filtro = " WHERE " + filtro;
+        }
+
+        parametros.put("filtro", filtro);
+
+        JasperPrint jasperPrint = reportService.gerarRelatorioVenda(parametros);
+        byte[] pdfBytes = reportService.exportarRelatorioParaPDF(jasperPrint);
+
+        configurarRespostaPDF(response, pdfBytes, "relatorio_venda.pdf");
     }
 
     // Método auxiliar para configurar a resposta HTTP para PDF
