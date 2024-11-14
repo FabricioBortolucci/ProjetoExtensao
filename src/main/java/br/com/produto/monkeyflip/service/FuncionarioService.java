@@ -30,10 +30,11 @@ public class FuncionarioService {
     public void salvar(Funcionario funcionario) {
         String cpfSemMascara = funcionario.getCpf().replaceAll("\\D", "");  // Remove qualquer caractere que não seja dígito
         String telefoneSemMascara = funcionario.getTelefone().replaceAll("\\D", "");
-
         funcionario.setCpf(cpfSemMascara);
         funcionario.setTelefone(telefoneSemMascara);
-
+        if (funcionario.getCpf().length() != 11) {
+            return;
+        }
         repository.save(funcionario);
     }
 
