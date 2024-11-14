@@ -15,7 +15,7 @@ FROM conta_receber cr
     left join venda_parcela vp on cr.id = vp.conta_receber_id
      $P!{filtro} 
 ORDER BY
-    cr.cr_data_vencimento, cr.venda_id]]></query>
+     cr.venda_id, cr.id]]></query>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>

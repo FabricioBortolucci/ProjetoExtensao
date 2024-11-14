@@ -87,9 +87,32 @@ public class VendaController {
                 break;
             }
         }
-
+        if (venda.getMacacoId() == null) {
+            model.addAttribute("macacoIdErro", "Id do macaco está nulo");
+            model.addAttribute("tipoPagamentos", TipoPagamento.values());
+            model.addAttribute("planoPagamentos", PlanoPagamento.values());
+            return "vendForm/vendCad";
+        }
+        if (venda.getPlanoPagamento() == null) {
+            model.addAttribute("planoPagamentosErro", "plano de pagamento está nulo");
+            model.addAttribute("tipoPagamentos", TipoPagamento.values());
+            model.addAttribute("planoPagamentos", PlanoPagamento.values());
+            return "vendForm/vendCad";
+        }
+        if (venda.getTipoPagamento() == null) {
+            model.addAttribute("tipoPagamentosErro", "tipo de pagamento está nulo");
+            model.addAttribute("tipoPagamentos", TipoPagamento.values());
+            model.addAttribute("planoPagamentos", PlanoPagamento.values());
+            return "vendForm/vendCad";
+        }
         List<VendaParcela> parcelas = (List<VendaParcela>) session.getAttribute("parcelasCalculadas");
-        if (parcelas == null) parcelas = new ArrayList<>();
+        if (parcelas == null) {
+            model.addAttribute("parcelaErro", "Gere as parcelas");
+            model.addAttribute("tipoPagamentos", TipoPagamento.values());
+            model.addAttribute("planoPagamentos", PlanoPagamento.values());
+            return "vendForm/vendCad";
+        }
+
         vendaService.salvar(venda, parcelas, userId);
         return "redirect:/vendas";
     }
@@ -145,7 +168,7 @@ public class VendaController {
 
     @PostMapping("/vendas/calcularParcelas")
     public ResponseEntity<List<VendaParcela>> calcularParcelas(
-            @RequestParam("precoMacaco") BigDecimal precoMacaco,
+            @RequestParam("precoMacaco") String precoMacaco,
             @RequestParam("quantParcelas") int quantParcelas,
             @RequestParam("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataVencimento,
             @ModelAttribute("venda") Venda venda,
@@ -156,7 +179,7 @@ public class VendaController {
             return ResponseEntity.badRequest().body(new ArrayList<>());
         }
 
-        if (dataVencimento.isBefore(LocalDate.now())){
+        if (dataVencimento.isBefore(LocalDate.now())) {
             return ResponseEntity.badRequest().body(new ArrayList<>());
         }
 
@@ -165,7 +188,8 @@ public class VendaController {
         }
 
         List<VendaParcela> parcelas = new ArrayList<>();
-        BigDecimal valorParcela = precoMacaco.divide(new BigDecimal(quantParcelas), RoundingMode.UNNECESSARY);
+        BigDecimal valorMacaco = new BigDecimal(precoMacaco);
+        BigDecimal valorParcela = valorMacaco.divide(new BigDecimal(quantParcelas), 2, RoundingMode.HALF_UP);
 
         for (int numparcela = 1; numparcela <= quantParcelas; numparcela++) {
             VendaParcela parcela = new VendaParcela(valorParcela, false, dataVencimento, venda, numparcela);
@@ -176,6 +200,17 @@ public class VendaController {
         session.setAttribute("parcelasCalculadas", parcelas);
         session.setAttribute("precoMacaco", precoMacaco);
         return ResponseEntity.ok(parcelas);
+    }
+
+
+    @GetMapping("/vendas/visualizar/{id}")
+    public String visualizarVenda(@PathVariable Long id, Model model) {
+        Venda venda = vendaService.buscarPorId(id);
+        venda.setParcelas(venda.getParcelas().stream()
+                .sorted(Comparator.comparingInt(VendaParcela::getNumparcela))
+                .collect(Collectors.toList()));
+        model.addAttribute("venda", venda);
+        return "vendForm/venView";
     }
 
 

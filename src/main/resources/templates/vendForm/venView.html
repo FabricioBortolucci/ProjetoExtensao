@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebars.js"></script>
+    <style>
+
+        /* table.transparent-table {
+             background-color: transparent !important; !* Torna o fundo da tabela transparente *!
+             border: none !important; !* Remove bordas, se necessário *!
+         }
+
+         table.transparent-table th,
+         table.transparent-table td {
+             background-color: transparent !important; !* Torna o fundo das células transparente *!
+         }*/
+
+
+    </style>
+    <title>Visualizar</title>
+</head>
+<body>
+<div class="d-flex">
+    <div th:include="~{fragments/home :: left-menu}" class="flex-shrink-0 bg-dark">
+    </div>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+        <div class="container">
+            <h2 class="mt-5 mb-4" th:text="${'Venda ' + venda.id}"></h2>
+
+            <form action="#" th:action="@{/vendas/visualizar}" method="post" th:object="${venda}"
+                  class="form-control pt-2 pb-4 w-75">
+                <div class="form-group">
+                    <p th:text="'Venda Id: ' + ${id}"/>
+                    <p th:text="'Data da venda: ' + ${#temporals.format(venda.data, 'dd/MM/yyyy')}"/>
+                    <p th:text="'Venda Status: ' + ${(venda.statusVenda != null && venda.statusVenda.descricao != null) ? venda.statusVenda.descricao : 'venda antiga'}"/>
+                    <p th:text="'Usuário finalizou a venda: ' + ${venda.usuFinalizouVenda}"/>
+                    <p th:text="'Valor Total: R$' + ${#numbers.formatDecimal(venda.valorTotal, 1,'POINT', 2, 'COMMA')}"/>
+                    <p th:text="'Plano de pagamento: ' + ${venda.planoPagamento.descricao}"/>
+                    <p th:text="'Tipo de pagamento: ' + ${venda.tipoPagamento.descricao}"/>
+                    <p th:if="${!venda.parcelas.isEmpty()}" th:text="'Quantidade Parcelas: ' + ${venda.quantParcelas != null ? venda.quantParcelas : 0}"/>
+
+                    <div style="display: flex; gap: 20px;">
+                        <table id="itensVenda" class="table w-25 table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Macaco</th>
+                                <th>Espécie</th>
+                                <th>Preço Unitário</th>
+                                <th>Quantidade</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="i : ${venda.itensVenda}">
+                                <td th:text="${i.produto.id}"></td>
+                                <td th:text="${i.produto.nome}"></td>
+                                <td th:text="${i.produto.especie}"></td>
+                                <td th:text="'R$' + ${#numbers.formatDecimal(i.precoUnitario, 1,'POINT', 2, 'COMMA')}"></td>
+                                <td th:text="${i.quantidade}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table title="Parcelas" id="Parcelas" class="table w-25 table-bordered" th:if="${!venda.parcelas.isEmpty()}">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Número Parcela</th>
+                                <th>Valor</th>
+                                <th>Data Vencimento</th>
+                                <th>Pago</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p : ${venda.parcelas}">
+                                <td th:text="${p.numparcela}"></td>
+                                <td th:text="'R$' + ${#numbers.formatDecimal(p.valorParcela, 1,'POINT', 2, 'COMMA')}"></td>
+                                <td th:text="${#temporals.format(p.dataVencimento, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${p.pago ? 'Sim' : 'Não'}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <a th:href="@{/vendas}" class="btn btn-danger mt-3">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

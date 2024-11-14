@@ -54,7 +54,7 @@
                             <td th:text="${cr.pago} ? 'Sim' : 'Não'"></td>
                             <td th:text="${cr.venda.planoPagamento.descricao}"></td>
                             <td>
-                                <a th:href="@{/contasReceber/alterarPago/{id}(id=${cr.id})}" class="btn btn-success">Finalizar</a>
+                                <a th:href="@{/contasReceber/alterarPago/{id}(id=${cr.id})}" th:if="${!cr.pago}" class="btn btn-success">Finalizar</a>
                             </td>
                         </tr>
                         </tbody>
@@ -68,17 +68,17 @@
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
                                         <a class="page-link"
-                                           th:href="@{/vendas(page=${currentPage - 1}, size=${size})}">Anterior</a>
+                                           th:href="@{/contasReceber(page=${currentPage - 1}, size=${size})}">Anterior</a>
                                     </li>
                                     <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
                                         th:classappend="${i == currentPage} ? 'active'">
-                                        <a class="page-link" th:href="@{/vendas(page=${i}, size=${size})}"
+                                        <a class="page-link" th:href="@{/contasReceber(page=${i}, size=${size})}"
                                            th:text="${i + 1}"></a>
                                     </li>
                                     <li class="page-item"
                                         th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
                                         <a class="page-link"
-                                           th:href="@{/vendas(page=${currentPage + 1}, size=${size})}">Próximo</a>
+                                           th:href="@{/contasReceber(page=${currentPage + 1}, size=${size})}">Próximo</a>
                                     </li>
                                 </ul>
                             </nav>

@@ -78,12 +78,13 @@
                            oninput="clearHiddenField();">
                     <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
                     <input id="prod_id" type="hidden" name="prodId" th:field="*{macacoId}">
+                    <div th:if="${macacoIdErro != null}" class="text-danger" th:text="${macacoIdErro}"></div>
 
                     <br/>
 
                     <label class="form-label mt-3" for="prod_preco">Preço do Macaco</label>
-                    <input type="text" class="form-control w-50" id="prod_preco" name="prodPreco">
-                    <input type="hidden" th:field="*{precoMacaco}" id="precoMacaco" />
+                    <input type="text" class="form-control w-50" id="prod_preco" name="prodPreco" readonly>
+                    <input type="hidden" th:field="*{precoMacaco}" id="precoMacaco"/>
 
                     <br/>
 
@@ -94,13 +95,16 @@
                                 th:value="${plano}"
                                 th:text="${plano.descricao}"></option>
                     </select>
-
+                    <div th:if="${planoPagamentosErro != null}" class="text-danger"
+                         th:text="${planoPagamentosErro}"></div>
                     <br/>
 
                     <label for="tipoPag">Tipo de Pagamento</label>
                     <select class="form-select show-tick w-50" th:field="*{tipoPagamento}" id="tipoPag">
                         <option value="">Nada Selecionado</option>
                     </select>
+                    <div th:if="${tipoPagamentosErro != null}" class="text-danger"
+                         th:text="${tipoPagamentosErro}"></div>
 
                     <br/>
 
@@ -113,6 +117,7 @@
                             <button id="gerarButton" class="btn btn-primary" type="button" onclick="gerarParcelas()">
                                 Gerar
                             </button>
+                            <div id="error-message-parcelas" class="text-danger mt-2" style="display: none;"></div>
                         </div>
                         <br/>
                         <table id="resultTable" class="table w-50">
@@ -128,6 +133,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <div th:if="${parcelaErro != null}" class="text-danger" th:text="${parcelaErro}"></div>
 
                     <button class="btn btn-success mt-3" type="submit"
                             th:text="${isEdit} ? 'Atualizar' : 'Salvar'"></button>
@@ -158,13 +164,22 @@
 
     function gerarParcelas() {
         const numParcelas = document.getElementById("numParcelas").value;
-        const precoMacaco = document.getElementById("prod_preco").value.replace(/[^\d,.-]/g, '').replace(',', '.');
+        const precoMacaco = document.getElementById("prod_preco").value.replace(/[^0-9,.-]/g, '').replace(/\./g, '').replace(',', '.');
         const dataVenda = document.getElementById("vendData").value;
         const macacoId = document.getElementById("prod_id").value;
 
+        const errorMessage = document.getElementById("error-message-parcelas");
+        if (!numParcelas || numParcelas <= 0) {
+            errorMessage.textContent = "Insira um número de parcelas maior que zero (0)";
+            errorMessage.style.display = "block";
+            return;
+        } else {
+            errorMessage.style.display = "none";
+        }
+
         const formData = new FormData();
         formData.append("quantParcelas", numParcelas);
-        formData.append("precoMacaco", precoMacaco);  // Adiciona o preço do macaco
+        formData.append("precoMacaco", precoMacaco); // Adiciona o preço do macaco sem o ponto de milhar
         formData.append("data", dataVenda);
         formData.append("macacoId", macacoId);
 
@@ -186,10 +201,13 @@
                 data.forEach(parcela => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
-        <td>${parcela.numparcela}</td>
-        <td>${parseFloat(parcela.valorParcela).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</td>
-        <td>${new Date(parcela.dataVencimento).toLocaleDateString('pt-BR')}</td>
-    `;
+                    <td>${parcela.numparcela}</td>
+                    <td>${parseFloat(parcela.valorParcela).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    })}</td>
+                    <td>${new Date(parcela.dataVencimento).toLocaleDateString('pt-BR')}</td>
+                `;
                     tableBody.appendChild(row);
                 });
 
@@ -275,7 +293,6 @@
             }
         });
     });
-
 
 
     function clearHiddenField() {

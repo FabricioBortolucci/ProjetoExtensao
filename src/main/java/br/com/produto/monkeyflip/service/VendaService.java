@@ -62,6 +62,7 @@ public class VendaService {
 
         if (venda.getContasReceber() == null) {
             venda.setContasReceber(new ArrayList<>());
+
         }
         List<ContaReceber> contasReceber = processarContaReceber(venda);
         venda.getContasReceber().addAll(contasReceber);
@@ -87,6 +88,8 @@ public class VendaService {
                 cr.setVenda(venda);
                 cr.setValor(parcela.getValorParcela());
                 cr.setPago(false);
+                parcela.setContaReceber(cr);
+
                 contasReceber.add(cr);
 
                 dataVencimento = dataVencimento.plusDays(30);
@@ -122,6 +125,14 @@ public class VendaService {
 
 
     public void excluir(Long id) {
+        Venda venda = repository.findById(id).isPresent() ? repository.findById(id).get() : null;
+        assert venda != null;
+
+        Macaco macaco = repositoryMacaco.findById(venda.getMacacoId()).isPresent() ? repositoryMacaco.findById(venda.getMacacoId()).get() : null;
+        assert macaco != null;
+        macaco.setQuantidade(macaco.getQuantidade() + 1);
+
+        repositoryMacaco.save(macaco);
         repository.deleteById(id);
     }
 
